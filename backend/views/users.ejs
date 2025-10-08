@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html lang="hu">
+<!-- backend/views/users.ejs -->
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/users.css" />
-    <title>Átgyedi felhasználó</title>
+  <meta charset="utf-8"/>
+  <title>Felhasználók</title>
+  <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-    <%- include('nav.ejs') %>
-    <div id="users-kontener">
-        <h2>Átgyedi felhasználó</h2>
-        
-    </div>
-    <script src="/js/user-backend.js"></script>
+  <%- include('nav') %>
+
+  <h1>Felhasználók</h1>
+  <ul id="users-list"></ul>
+
+  <script src="/js/user-backend.js"></script>
 </body>
 </html>

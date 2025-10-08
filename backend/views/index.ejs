@@ -1,18 +1,24 @@
-<!DOCTYPE html>
-<html lang="hu">
+<!-- backend/views/index.ejs -->
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta 
-    name="viewport"
-     content="width=device-width, initial-scale=1.0"
-     />
-     <link
-    rel="stylesheet"
-    href="/css/index.css">
-    <title>Edzőterem kezdőoldal.</title>
+  <meta charset="utf-8"/>
+  <title>Home</title>
+  <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-    <%- include('nav.ejs') %>
-    
+  <%- include('nav.ejs') %>
+  <h1>Üdv a Gym App backendjén</h1>
+
+  <section>
+    <h2>...</h2> 
+    <h3>Felhasználók</h3>
+    <ul id="users-list"></ul>
+
+    <h3>Edzők</h3>
+    <ul id="trainers-list"></ul>
+  </section>
+
+  <script src="/js/user-backend.js"></script>
 </body>
 </html>

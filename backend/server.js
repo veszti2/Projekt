@@ -1,8 +1,28 @@
+require('dotenv').config();
+
 const path = require('node:path');
 const express = require('express');
 const app = express();
+const connectDB = require('./utils/dbConnection');
 const mongoose = require('mongoose');
-require('dotenv').config();
+const userRoutes = require('./routes/UserRoutesBackend');
+
+const MONGO_URI = process.env.MONGO_URI || '???'
+connectDB(MONGO_URI);
+
+app.use('/css', express.static(path.join(__dirname, 'public', 'css')));
+app.use('/js', express.static(path.join(__dirname, 'public', 'js')));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use('/api', userRoutes);
+
+app.get('/', (req, res) => res.render('index'));
+app.get('/users', (req, res) => res.render('users'));
+app.get('/trainers', async (req, res) => {
+
+  res.render('index');
+});
 
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -47,3 +67,5 @@ app.get('/', (req, res) => {
 });
 
 app.use('/users-backend', require('./routes/UserRoutesBackend.js'));
+app.set('view')
+app.use(express.json());

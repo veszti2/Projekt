@@ -1,62 +1,59 @@
 const User = require('../models/User.js');
+// backend/controllers/UserControllerBackend.js
+const Trainer = require('../models/Trainers.js');
+const Gymsplit = require('../models/Gymsplit.js');
 
+// Felhasználók
 exports.getAllUsersBackend = async (req, res) => {
-    try {
-        const usersBackend = await User.find();
-        res.statusCode = 200;
-        return res.render("Users.ejs", { usersBackend });
-    } catch (error) {
-        res.statusCode = 404;
-        return res.render("404.ejs");
-    }
+  try {
+    const users = await User.find().lean();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: 'Hiba a felhasználók lekérésekor', error: err.message });
+  }
 };
 
-exports.getOneUserBackend = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const userBackend = await User.findById({ _id: id });
-        res.statusCode = 200;
-        return res.render("User.ejs", { userBackend });
-    } catch (error) {
-        res.statusCode = 404;
-        return res.render("404.ejs");
-    }
+exports.getUserById = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).lean();
+    if (!user) return res.status(404).json({ message: 'Felhasználó nem található' });
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: 'Hiba a felhasználó lekérésekor', error: err.message });
+  }
 };
 
-exports.postUserBackend = async (req, res) => {
-    try {
-        const { nev, statusz } = req.body;
-        const newUserBackend = new User({ nev, statusz });
-        await newUserBackend.save();
-        res.statusCode = 201;
-        return res.json({ msg: 'Létre jött az új felhasználó!' });
-    } catch (error) {
-        res.statusCode = 409;
-        return res.json({ msg: 'Nem jött létre az új felhasználó!' });
-    }
+exports.createUser = async (req, res) => {
+  try {
+    const { name, email, passwordHash, role } = req.body;
+    const user = new User({ name, email, passwordHash, role });
+    await user.save();
+    res.status(201).json(user);
+  } catch (err) {
+    res.status(400).json({ message: 'Hiba a felhasználó létrehozásakor', error: err.message });
+  }
 };
 
-exports.updateOneUserBackend = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { nev, statusz } = req.body;
-        await User.findByIdAndUpdate({ _id: id }, { nev, statusz });
-        res.statusCode = 201;
-        return res.json({ msg: 'Sikeres módosítás!' });
-    } catch (error) {
-        res.statusCode = 404;
-        return res.json({ msg: 'Valami hiba történt!' });
-    }
+exports.updateUser = async (req, res) => {
+  try {
+    const updated = await User.findByIdAndUpdate(req.params.id, req.body, { new: true }).lean();
+    if (!updated) return res.status(404).json({ message: 'Felhasználó nem található' });
+    res.json(updated);
+  } catch (err) {
+    res.status(400).json({ message: 'Hiba a felhasználó frissítésekor', error: err.message });
+  }
 };
 
-exports.deleteOneUserBackend = async (req, res) => {
-    try {
-        const { id } = req.params;
-        await User.findByIdAndDelete({ _id: id });
-        res.statusCode = 200;
-        return res.json({ msg: 'Sikeres törlés!' });
-    } catch (error) {
-        res.statusCode = 409;
-        return res.json({ msg: 'Valami hiba történt!' });
-    }
+exports.deleteUser = async (req, res) => {
+  try {
+    const removed = await User.findByIdAndDelete(req.params.id).lean();
+    if (!removed) return res.status(404).json({ message: 'Felhasználó nem található' });
+    res.json({ message: 'Törölve', removed });
+  } catch (err) {
+    res.status(500).json({ message: 'Hiba a felhasználó törlésekor', error: err.message });
+  }
 };
+
+
+
+
