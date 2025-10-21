@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', getAllUsersBackend);
 router.get('/:id', getUserById)
-// router.post('/', postUserBackend);
+router.post('/', createUser);
 router.put('/modosit/:id', updateUser);
 router.delete('/torol/:id', deleteUser);
 

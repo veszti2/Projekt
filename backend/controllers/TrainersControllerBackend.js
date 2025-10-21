@@ -1,5 +1,5 @@
 // --- Quateres edzők3 ---
-const Trainer = require('../models/Trainer.js');
+const Trainer = require('../models/Trainer');
 
 
 exports.getAllTrainers = async (req, res) => {
@@ -21,16 +21,16 @@ exports.getTrainerById = async (req, res) => {
   }
 };
 
-// exports.createTrainer = async (req, res) => {
-//   try {
-//     const { name, email, passwordHash, role } = req.body;
-//     const trainer = new Trainer({ name, email, passwordHash, role });
-//     await trainer.save();
-//     res.status(201).json(trainer);
-//   } catch (err) {
-//     res.status(400).json({ message: 'Hiba az edző létrehozásakor', error: err.message });
-//   }
-// };
+exports.createTrainer = async (req, res) => {
+  try {
+    const { name, email, passwordHash, role } = req.body;
+    const trainer = new Trainer({ name, email, passwordHash, role });
+    await trainer.save();
+    res.status(201).json(trainer);
+  } catch (err) {
+    res.status(400).json({ message: 'Hiba az edző létrehozásakor', error: err.message });
+  }
+};
 
 exports.updateTrainer = async (req, res) => {
   try {

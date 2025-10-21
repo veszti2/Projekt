@@ -2,7 +2,6 @@ require('dotenv').config();
 
 const path = require('node:path');
 const express = require('express');
-const mongoose = require('mongoose');
 const app = express();
 
 app.use('/css', express.static(path.join(__dirname, 'public', 'css')));
@@ -30,3 +29,4 @@ dbConnection()
 app.use('/api', require('./routes/mainRoutes.js'));
 app.use('/api/users-backend', require('./routes/userRoutesBackend.js'));
 app.use('/api/trainers', require('./routes/TrainersRoutesBackend.js'));
+app.use('/api/new-trainer', require('./routes/NewTrainersRoutesBackend.js'));
