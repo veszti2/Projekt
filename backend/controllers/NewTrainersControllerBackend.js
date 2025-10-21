@@ -13,29 +13,21 @@ exports.getNewTrainersBackend = (req, res) => {
 
 exports.postNewTrainersBackend = async (req, res) => {
     try {
-        const {
+        const { nev, elerhetoseg, specialization, experience, ar, kep } =
+            req.body;
+
+        const newTrainer = new Trainer({
             nev,
             elerhetoseg,
             specialization,
             experience,
             ar,
             kep,
-        } = req.body;
-
-        const edzok = edzok.split(',');
-
-        const newTrainers = new Trainer({
-            nev,
-            elerhetoseg,
-            specialization,
-            experience,
-            ar,
-            kep,
-            // peldanySzam,
-            // kedvezmeny,
         });
 
-        await newTrainers.save();
+        console.log(newTrainer);
+
+        await newTrainer.save();
 
         res.statusCode = 201;
         return res.json({ msg: 'Sikeres feltöltés!' });

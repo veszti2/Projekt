@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const path = require('node:path');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
 app.use('/css', express.static(path.join(__dirname, 'public', 'css')));
@@ -10,6 +11,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'public')));
+app.use(cors());
 
 const PORT = process.env.PORT || 3500;
 
@@ -28,5 +30,9 @@ dbConnection()
 
 app.use('/api', require('./routes/mainRoutes.js'));
 app.use('/api/users-backend', require('./routes/userRoutesBackend.js'));
-app.use('/api/trainers', require('./routes/TrainersRoutesBackend.js'));
+app.use('/api/trainers-backend', require('./routes/TrainersRoutesBackend.js'));
+app.use(
+    '/api/trainers-frontend',
+    require('./routes/TrainersRoutesFrontend.js')
+);
 app.use('/api/new-trainer', require('./routes/NewTrainersRoutesBackend.js'));

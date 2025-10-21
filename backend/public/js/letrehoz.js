@@ -30,6 +30,6 @@ async function letrehoz(event) {
     if (response.ok) {
         const resp = await response.json();
         window.alert(resp.msg);
-        window.location.href = '/api/Trainers-backend';
+        window.location.href = '/api/trainers-backend';
     }
 }

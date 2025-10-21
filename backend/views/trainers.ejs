@@ -1,20 +1,28 @@
 <!-- backend/views/users.ejs -->
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8"/>
-  <title>Edzőink</title>
-  <link rel="stylesheet" href="/css/index.css">
-</head>
-<body>
-  <%- include('nav') %>
+    <head>
+        <meta charset="utf-8" />
+        <title>Edzőink</title>
+        <link
+            rel="stylesheet"
+            href="/css/index.css"
+        />
+    </head>
+    <body>
+        <%- include('nav') %>
 
-  <h1>Quater Edző Csapat!</h1>
-  <p><a href="/api/new-trainer">Új edző felvétele</a></p>
+        <h1>Quater Edző Csapat!</h1>
+        <p><a href="/api/new-trainer">Új edző felvétele</a></p>
 
-
-  <ul id="trainers-list"></ul>
-
-  <script src="/backend/models/Trainer.js"></script>
-</body>
+        <ul id="trainers-list">
+            <% trainers.forEach(element => { %>
+            <p>Név: <%= element.nev %></p>
+            <img
+                src="<%= element.kep %>"
+                alt=""
+            />
+            <% }) %>
+        </ul>
+    </body>
 </html>
