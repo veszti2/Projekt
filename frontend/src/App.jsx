@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import About from './pages/About';
 import Gym from './pages/Gym';
 import Trainers from './pages/Trainers';
+import './app.css';
 
 function App() {
 
