@@ -33,6 +33,6 @@ exports.postNewTrainersBackend = async (req, res) => {
         return res.json({ msg: 'Sikeres feltöltés!' });
     } catch (error) {
         res.statusCode = 500;
-        return res.json({ msg: 'Valami hiba történt!' });
+        return res.json({ msg: 'Valami hiba történt!' + error.message });
     }
 };

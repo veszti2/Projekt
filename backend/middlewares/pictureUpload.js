@@ -10,11 +10,11 @@ cloudinary.config({
 
 const pictureUploader = async (req, res, next) => {
     const { kep } = req.body;
-    // const results = await cloudinary.uploader.upload(kep);
-    // const url = cloudinary.url(results.public_id);
-    // console.log(url);
+    const results = await cloudinary.uploader.upload(kep);
+    const url = cloudinary.url(results.public_id);
+    console.log(url);
 
-    // req.body.kep = url;
+    req.body.kep = url;
 
     next();
 };

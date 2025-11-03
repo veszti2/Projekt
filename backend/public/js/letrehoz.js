@@ -9,7 +9,15 @@ async function letrehoz(event) {
     // const peldanySzam = document.querySelector('#peldanySzam').value;
     // const kedvezmeny = document.querySelector('#kedvezmeny').value;
     const kep = document.querySelector('#kep').value;
-
+    console.log({
+            nev,
+            elerhetoseg,
+            specialization,
+            experience,
+            ar,
+            kep,
+        });
+    
     const response = await fetch('/api/new-trainer', {
         method: 'POST',
         headers: {
@@ -26,10 +34,12 @@ async function letrehoz(event) {
     });
 
     console.log(response);
+    const resp = await response.json();
 
     if (response.ok) {
-        const resp = await response.json();
         window.alert(resp.msg);
         window.location.href = '/api/trainers-backend';
+    } else {
+        window.alert(resp.msg);
     }
 }
