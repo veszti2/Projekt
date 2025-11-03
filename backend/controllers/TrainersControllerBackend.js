@@ -18,7 +18,7 @@ exports.getTrainerById = async (req, res) => {
         const trainer = await Trainer.findById(req.params.id).lean();
         if (!trainer)
             return res.status(404).json({ message: 'Edző nem található' });
-        res.json(trainer);
+        res.render('trainer.ejs', { trainer });
     } catch (err) {
         res.status(500).json({
             message: 'Hiba az edző lekérésekor',
@@ -52,7 +52,7 @@ exports.updateTrainer = async (req, res) => {
             return res
                 .status(404)
                 .json({ message: 'Felhasználó nem található' });
-        res.json(updated);
+        res.json({msg: 'Sikeres módosítás!'});
     } catch (err) {
         res.status(400).json({
             message: 'Hiba az edző frissítésekor',
@@ -68,7 +68,7 @@ exports.deleteTrainer = async (req, res) => {
             return res
                 .status(404)
                 .json({ message: 'Felhasználó nem található' });
-        res.json({ message: 'Törölve', removed });
+        res.json({ msg: 'Törölve' });
     } catch (err) {
         res.status(500).json({
             message: 'Hiba az edző törlésekor',

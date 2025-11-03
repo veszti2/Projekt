@@ -18,11 +18,15 @@
         <ul id="trainers-list">
             <% trainers.forEach(element => { %>
             <p>Név: <%= element.nev %></p>
+            <p>Elérhetőség: <%= element.elerhetoseg %></p>
             <img
                 src="<%= element.kep %>"
                 alt=""
             />
+            <a class="modosit" href="/api/trainers-backend/<%= element._id %>">Módosítás</a>
+            <button class="torol" onclick="torles('<%= element._id%>')">Törlés</button>
             <% }) %>
         </ul>
+        <script src="/js/trainer-kezel.js"></script>
     </body>
 </html>
