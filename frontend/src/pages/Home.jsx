@@ -6,7 +6,7 @@ const Home = () => {
     <div>
       <Navbar />
       <h1>Edzőterem</h1>
-      <p>Edzőterem</p>
+      <p>fasz</p>
     </div>
   )
 }
