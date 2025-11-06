@@ -2,8 +2,9 @@ import './Home.css'
 import Navbar from './Navbar'
 
 const Home = () => {
+  
   return (
-    <div>
+    <div className='home-kontener'>
       <Navbar />
       <h1>Edzőterem</h1>
       <p>fasz</p>
