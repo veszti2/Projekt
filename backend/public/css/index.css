@@ -30,3 +30,7 @@ body {
     height: 100vh;
     padding-top: 1em;
 }
+
+#trainers-list img {
+    width: 150px;
+}

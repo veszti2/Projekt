@@ -9,6 +9,7 @@ function Navbar() {
         <li><Link to="/about">Rólunk</Link></li>
         <li><Link to="/gym">Terem</Link></li>
         <li><Link to="/trainers">Edzők</Link></li>
+        <li><Link to="http://localhost:3500/api">Backend</Link></li>
       </ul>
     </nav>
   );
