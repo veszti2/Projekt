@@ -1,8 +1,39 @@
-import React from 'react'
+import React, { useState, useEffect, cloneElement } from 'react'
 import Navbar from './Navbar'
 import './About.css'
 
 const About = () => {
+  const [trainers, setTrainers] = useState([]);
+    
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+
+      useEffect(() => {
+          const edzoLeker = async () => {
+              const response = await fetch(
+                  'http://localhost:3500/api/trainers-frontend'
+              );
+  
+              const adat = await response.json();
+              console.log(adat.trainers);
+  
+              if (response.ok) {
+                  // console.log(adat.trainer);
+                    shuffle(adat.trainers);
+                    let atadott = [];
+                    atadott.push(adat.trainers[0]);                   
+                    atadott.push(adat.trainers[1]);                   
+                    atadott.push(adat.trainers[3]);                   
+                  setTrainers(atadott);
+              } else {
+                  window.alert(adat.msg);
+              }
+          };
+  
+          edzoLeker();
+      }, []);
+
   return (
     <div className="about-page">
       <Navbar />
@@ -50,7 +81,21 @@ const About = () => {
         </p>
 
         <div className="trainer-cards">
-          <div className="trainer-card">
+        {
+            trainers.map(elem => {
+                return (
+                    <div className="trainer-card" key={elem._id}>
+            <img
+              src={elem.kep}
+              alt="Edző"
+            />
+            <h3>{elem.nev}</h3>
+            <p>{elem.experience}</p>
+          </div>
+                )
+            })
+        }
+          {/* <div className="trainer-card">
             <img
               src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=800&q=80"
               alt="Edző"
@@ -72,9 +117,9 @@ const About = () => {
               alt="Edző"
             />
             <h3>Szabó Márk</h3>
-            <p>Funkcionális edzés és crossfit szakértő</p>
-          </div>
-        </div>
+            <p> </p>
+          </div>*/}
+        </div> 
       </section>
 
       {/* Küldetés */}

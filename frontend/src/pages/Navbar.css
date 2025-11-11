@@ -1,7 +1,87 @@
-nav {
-  background-color: #222;
-  color: white;
-  padding: 1rem;
+/* Navbar.css */
+
+nav a {
+  margin: 0 20px 0 20px;
+}
+
+/* Alap navbar */
+.navbar {
+  width: 100%;
+  height: 50px;
+  background: #111;
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* Inner container */
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 20px;
+}
+
+/* Logo fix balra */
+.navbar-logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  position: relative; /* a menühöz képest */
+  z-index: 10;
+  transition: color 0.3s ease, transform 0.3s ease;
+  margin-right: 20px; 
+}
+
+.navbar-logo:hover {
+  color: #690505;
+  transform: scale(1.05);
+}
+
+/* Navbar linkek - alapból rejtve, vízszintes, logó mellett jobbra */
+.navbar-links {
+  list-style: none;
+  display: contents;
+  gap: 800px; /* linkek közötti távolság */
+  position: inherit;
+  top: 50%;
+  left: calc(100% + 10px); /* közvetlenül a logó mellett */
+  transform: translateY(-50%) translateX(0);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s ease, transform 0.1s ease;
+  z-index: 9;
+}
+
+/* Hoverre megjelenik a menü */
+.navbar-logo:hover + .navbar-links,
+.navbar-links:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Linkek stílusa */
+.navbar-links li a {
+  display: block;
+  padding: 8px 15px;
+  background: #da9705;
+  color: #0a0000;
+  text-decoration: none;
+  border-radius: 15px;
+  transition: 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.navbar-links li a:hover {
+  background: linear-gradient(135deg, rgb(247, 231, 5), rgb(187, 8, 8));
+  transform: translateY(-3px);
+  color: #000;
+  box-shadow: 0 0 25px rgb(168, 79, 16), 0 0 50px rgb(163, 7, 7);
 }

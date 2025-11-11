@@ -1,18 +1,24 @@
 import { Link } from 'react-router-dom';
-import './Navbar.css'; // ha szeretnél stílust is hozzáadni
+import './Navbar.css';
 
 function Navbar() {
   return (
-    <nav>
-      <ul>
-        <li><Link to="/">Főoldal</Link></li>
-        <li><Link to="/about">Rólunk</Link></li>
-        <li><Link to="/gym">Terem</Link></li>
-        <li><Link to="/trainers">Edzők</Link></li>
-        <li><Link to="http://localhost:3500/api">Backend</Link></li>
-      </ul>
+    <nav className="navbar">
+      <div className="navbar-inner">
+        <div className="navbar-logo">
+          💪 GYMPOWER
+        </div>
+        <ul className="navbar-links">
+          <li><Link to="/">Főoldal</Link></li>
+          <li><Link to="/about">Rólunk</Link></li>
+          <li><Link to="/gym">Terem</Link></li>
+          <li><Link to="/trainers">Edzők</Link></li>
+          <li><a href="http://localhost:3500/api" target="_blank" rel="noopener noreferrer">Backend</a></li>
+        </ul>
+      </div>
     </nav>
   );
 }
+
 
 export default Navbar;
