@@ -1,0 +1,129 @@
+/* === ALAP BEÁLLÍTÁSOK === */
+.gym-page {
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  color: #f4f4f4;
+  background-color: #1b1b1b;
+  line-height: 1.7;
+  padding-bottom: 3rem;
+}
+
+/* HERO SZEKCIÓ */
+.gym-hero {
+  background: linear-gradient(135deg, #111 0%, #1f1f1f 100%);
+  color: #fff;
+  text-align: center;
+  padding: 6rem 1rem 5rem;
+  border-bottom: 2px solid #a68a17;
+}
+
+.gym-hero h1 {
+  font-size: 2.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #a68a17;
+  margin-bottom: 1rem;
+}
+
+.gym-hero p {
+  font-size: 1.2rem;
+  color: #ccc;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* SZEKCIÓK */
+.gym-section {
+  max-width: 900px;
+  margin: 3rem auto;
+  background-color: #222;
+  padding: 2.5rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.gym-section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 15px #a68a17;
+}
+
+/* CÍMEK */
+.gym-section h2 {
+  color: #a68a17;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #a68a17;
+  padding-left: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* BEKEZDÉSEK */
+.gym-section p {
+  color: #ddd;
+  font-size: 1.05rem;
+  margin-top: 0.5rem;
+}
+
+/* LISTÁK */
+.gym-section ul {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.gym-section li {
+  margin-bottom: 0.6rem;
+  position: relative;
+  color: #ccc;
+  font-size: 1rem;
+}
+
+.gym-section li::before {
+  content: '•';
+  color: #a68a17;
+  font-weight: bold;
+  position: absolute;
+  left: -1rem;
+}
+
+/* LINKEK */
+.gym-section a {
+  color: #a68a17;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.gym-section a:hover {
+  color: #a68a17;
+}
+
+/* LÁBLÉC */
+.gym-footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 2rem 1rem;
+  background-color: #111;
+  border-top: 2px solid #a68a17;
+}
+
+.gym-footer p {
+  color: #999;
+  font-size: 0.95rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .gym-hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .gym-section {
+    margin: 2rem 1rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .gym-section h2 {
+    font-size: 1.4rem;
+  }
+}

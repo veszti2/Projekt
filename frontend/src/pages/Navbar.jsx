@@ -13,6 +13,7 @@ function Navbar() {
           <li><Link to="/about">Rólunk</Link></li>
           <li><Link to="/gym">Terem</Link></li>
           <li><Link to="/trainers">Edzők</Link></li>
+          <li><Link to="/rules">Szabályzat</Link></li>
           <li><a href="http://localhost:3500/api" target="_blank" rel="noopener noreferrer">Backend</a></li>
         </ul>
       </div>

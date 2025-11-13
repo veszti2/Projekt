@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import About from './pages/About';
 import Gym from './pages/Gym';
 import Trainers from './pages/Trainers';
+import Rules from './pages/Rules';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Route path='/about' element={<About /> } />
         <Route path='/gym' element={<Gym /> } />
         <Route path='/trainers' element={<Trainers /> } />
+        <Route path='/rules' element={<Rules /> } />
       </Routes>
     </BrowserRouter>
     </>
