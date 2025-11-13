@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@104.2,500&display=swap');
+
 /* === ALAP BEÁLLÍTÁSOK === */
 .gym-page {
-  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  font-family: url('https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@104.2,500&display=swap');
   color: #f4f4f4;
   background-color: #1b1b1b;
   line-height: 1.7;
   padding-bottom: 3rem;
+  
 }
 
 /* HERO SZEKCIÓ */
@@ -14,21 +17,30 @@
   text-align: center;
   padding: 6rem 1rem 5rem;
   border-bottom: 2px solid #a68a17;
+  
 }
 
 .gym-hero h1 {
-  font-size: 2.8rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #a68a17;
-  margin-bottom: 1rem;
+   background: linear-gradient(135deg, #1b1b1b, #222);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
+  transition: all 0.5s ease;
+  box-shadow: 0 0 40px rgba(186, 158, 46, 0.2);
+  transform: translateY(-10px);
 }
 
 .gym-hero p {
-  font-size: 1.2rem;
-  color: #ccc;
-  max-width: 600px;
-  margin: 0 auto;
+  color: whitesmoke;
+  text-shadow: 0 0 10px rgba(196, 159, 38, 0.8), 0 0 25px rgba(229, 201, 17, 0.4);
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #a68a17;
+  padding-left: 0.8rem;
+  max-width: 900px;
+  
 }
 
 /* SZEKCIÓK */
