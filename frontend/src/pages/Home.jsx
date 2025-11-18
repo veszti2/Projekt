@@ -5,7 +5,7 @@ const Home = () => {
   
   return (
     <div className="home">
-      <Navbar />
+      
 
       {/* Hero szekció */}
       <header className="hero">
