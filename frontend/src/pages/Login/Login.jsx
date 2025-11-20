@@ -52,7 +52,7 @@ const Login = () => {
       </form>
 
       <p className="login-switch">
-        Nincs még fiókod? <a href="/signup">Regisztrálj</a>
+        Nincs még fiókod? <a href="/register">Regisztrálj</a>
       </p>
     </div>
   );

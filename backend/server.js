@@ -3,21 +3,21 @@ require('dotenv').config();
 const path = require('node:path');
 const express = require('express');
 const cors = require('cors');
-const app = express();
-
-app.use('/css', express.static(path.join(__dirname, 'public', 'css')));
-app.use('/js', express.static(path.join(__dirname, 'public', 'js')));
-app.set('view engine', 'ejs');
-
-app.use(express.json());
-app.use(express.static(path.resolve(__dirname, 'public')));
-app.use(cors());
+const ejs = require('ejs');
 
 const PORT = process.env.PORT || 3500;
+const app = express();
 
-const dbConnection = require('./utils/dbConnection.js');
+const dir = __dirname;
 
-dbConnection()
+app.use(express.static(path.resolve(dir, 'public')));
+app.set('view engine', 'ejs');
+app.use(express.json());
+app.use(cors());
+
+const dbConnect = require('./utils/dbConnection.js');
+
+dbConnect()
     .then(() => {
         console.log('Sikeres adatbázis csatlakozás!');
         app.listen(PORT, () => {
@@ -25,14 +25,22 @@ dbConnection()
         });
     })
     .catch((error) => {
-        console.log(error.message);
+        console.error(`A hiba oka: ${error.message}`);
     });
 
-app.use('/api', require('./routes/mainRoutes.js'));
-app.use('/api/users-backend', require('./routes/userRoutesBackend.js'));
-app.use('/api/trainers-backend', require('./routes/TrainersRoutesBackend.js'));
-app.use(
-    '/api/trainers-frontend',
-    require('./routes/TrainersRoutesFrontend.js')
-);
-app.use('/api/new-trainer', require('./routes/NewTrainersRoutesBackend.js'));
+app.use('/api', require('./routes/mainRoutesBackend.js'));
+app.use('/api/cakes-backend', require('./routes/cakes/cakesRoutesBackend.js'));
+app.use('/api/cakes-frontend', require('./routes/cakes/cakesRoutesFrontend.js'));
+app.use('/api/new-cake', require('./routes/cakes/newCakeRoutes.js'));
+app.use('/api/one-cake-backend', require('./routes/cakes/oneCakeRoutesBackend.js'));
+app.use('/api/users-backend', require('./routes/users/usersRoutesBackend.js'));
+
+app.use((req, res) => {
+    try {
+        res.status(404);
+        return res.render('404.ejs');
+    } catch (error) {
+        res.status(500);
+        return res.json({ msg: 'Általános szerver hiba!' });
+    }
+});

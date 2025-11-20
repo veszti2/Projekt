@@ -4,7 +4,7 @@ import About from './pages/About';
 import Gym from './pages/Gym';
 import Trainers from './pages/Trainers';
 import Rules from './pages/Rules';
-import Login from './pages/Login/LOgin';
+import Login from './pages/Login/Login';
 import Navbar from './pages/Navbar';
 import Register from './pages/Register/Register';
 
