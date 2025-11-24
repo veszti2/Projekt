@@ -28,12 +28,11 @@ dbConnect()
         console.error(`A hiba oka: ${error.message}`);
     });
 
-app.use('/api', require('./routes/mainRoutesBackend.js'));
-app.use('/api/cakes-backend', require('./routes/cakes/cakesRoutesBackend.js'));
-app.use('/api/cakes-frontend', require('./routes/cakes/cakesRoutesFrontend.js'));
-app.use('/api/new-cake', require('./routes/cakes/newCakeRoutes.js'));
-app.use('/api/one-cake-backend', require('./routes/cakes/oneCakeRoutesBackend.js'));
-app.use('/api/users-backend', require('./routes/users/usersRoutesBackend.js'));
+app.use('/api', require('./routes/mainRoutes.js'));
+app.use('/api/users-backend', require('./routes/userRoutesBackend.js'));
+app.use('/api/trainers-backend', require('./routes/TrainersRoutesBackend.js'));
+app.use('/api/trainers-frontend',require('./routes/TrainersRoutesFrontend.js'));
+app.use('/api/new-trainer', require('./routes/NewTrainersRoutesBackend.js'));
 
 app.use((req, res) => {
     try {

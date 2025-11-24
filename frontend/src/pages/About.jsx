@@ -11,7 +11,7 @@ function shuffle(array) {
 
       useEffect(() => {
           const edzoLeker = async () => {
-              const response = await fetch(
+              const response = await fetch( 
                   'http://localhost:3500/api/trainers-frontend'
               );
   
