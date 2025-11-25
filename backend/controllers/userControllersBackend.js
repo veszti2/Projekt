@@ -4,7 +4,7 @@ const Gymsplit = require('../models/Gymsplit.js');
 // Felhasználók
 exports.getAllUsersBackend = async (req, res) => {
   try {
-    const users = await User.find({});
+    const users = await User.find({});  
     return res.render('users.ejs');
   } catch (err) {
     res.status(500).json({ message: 'Hiba a felhasználók lekérésekor', error: err.message });
