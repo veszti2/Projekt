@@ -33,6 +33,7 @@ app.use('/api/users-backend', require('./routes/userRoutesBackend.js'));
 app.use('/api/trainers-backend', require('./routes/TrainersRoutesBackend.js'));
 app.use('/api/trainers-frontend',require('./routes/TrainersRoutesFrontend.js'));
 app.use('/api/new-trainer', require('./routes/NewTrainersRoutesBackend.js'));
+app.use('/api/register-frontend', require('./routes/userRegisterRoutes.js'));
 
 app.use((req, res) => {
     try {

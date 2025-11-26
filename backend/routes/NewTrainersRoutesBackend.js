@@ -1,6 +1,6 @@
 const express = require('express');
-const pictureUploader = require('../middlewares/pictureUpload');
-const { postNewTrainersBackend, getNewTrainersBackend } = require('../controllers/NewTrainersControllerBackend');
+const pictureUploader = require('../middlewares/pictureUpload.js');
+const { postNewTrainersBackend, getNewTrainersBackend } = require('../controllers/NewTrainersControllerBackend.js');
 
 
 const router = express.Router();

@@ -5,8 +5,8 @@ const {
     createTrainer,
     updateTrainer,
     deleteTrainer,
-} = require('../controllers/TrainersControllerBackend');
-const pictureDeleter = require('../middlewares/pictureDelete');
+} = require('../controllers/TrainersControllerBackend.js');
+const pictureDeleter = require('../middlewares/pictureDelete.js');
 
 const router = express.Router();
 

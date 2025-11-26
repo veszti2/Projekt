@@ -31,7 +31,7 @@ export default function Register() {
 
     if (response.ok) {
       window.alert(valasz.msg);
-      window.location.href = "/";
+      window.location.href = "/login";
     } else {
       window.alert(valasz.msg);
     }

@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllUsersBackend, getUserById, createUser, updateUser, deleteUser } = require('../controllers/userControllersBackend');
+const { getAllUsersBackend, getUserById, createUser, updateUser, deleteUser } = require('../controllers/userControllersBackend.js');
 const router = express.Router();
 
 router.get('/', getAllUsersBackend);

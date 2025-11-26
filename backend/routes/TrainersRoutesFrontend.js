@@ -1,7 +1,7 @@
 const express = require('express');
 const {
     getAllTrainersFrontend,
-} = require('../controllers/TrainersControllerFrontend');
+} = require('../controllers/TrainersControllerFrontend.js');
 const router = express.Router();
 
 router.get('/', getAllTrainersFrontend);
