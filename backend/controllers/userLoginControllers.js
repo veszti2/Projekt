@@ -1,9 +1,10 @@
-const User = require('../../models/User.js');
+const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 
-const loginUser = async (req, res) => {
+exports.loginUser = async (req, res) => {
     try {
         const { email, jelszo } = req.body;
+        console.log({ email, jelszo });
 
         // Közvetlenül az emailre keresünk, nem kell minden felhasználót lekérni
         const letezoUser = await User.findOne({ email });
@@ -24,5 +25,3 @@ const loginUser = async (req, res) => {
         return res.status(500).json({ msg: error.message });
     }
 };
-
-module.exports = { loginUser };

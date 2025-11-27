@@ -1,31 +1,32 @@
-const User = require('../../models/User.js');
+const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 
-module.exports.loginUser = async (req, res) => {
-    try {
-        const { email, jelszo } = req.body;
+exports.registerUser = async (req, res) => {
+	try {
+		const { nev, email, jelszo } = req.body;
+        console.log({ nev, email, jelszo });
+        
 
-        const users = await User.find({});
-        const letezoUser = users.filter(elem => elem.email === email);
+		const users = await User.find({});
 
-        if (letezoUser.length === 0) {
-            throw new Error('Ezzel az e-mail címmel nem létezik felhasználó!');
-        }
+		const letezoUser = users.filter(elem => elem.email === email);
 
-        const hasonlit = await bcrypt.compare(jelszo, letezoUser[0].jelszo);
+		if (letezoUser.length !== 0) {
+			throw new Error('Ezzel az e-mail címmel már regisztráltak!');
+		}
 
-        if (hasonlit) {
-            res.statusCode = 200;
-            return res.json({
-                msg: 'Üdvözlünk az oldalunkon!',
-                letezoUser
-            });
-        } else {
-            throw new Error('Ezzel a jelszóval nem létezik felhasználó!');
-        }
+		const salt = await bcrypt.genSalt(10);
+		const hashedPassword = await bcrypt.hash(jelszo, salt);
 
+		const newUser = new User({ nev, email, jelszo: hashedPassword });
+		await newUser.save();
+		
+        res.statusCode = 201;
+        return res.json({ msg: 'Sikeres regisztráció!' });
     } catch (error) {
-        res.statusCode = 500;
+		res.statusCode = 500;
         return res.json({ msg: error.message });
     }
 };
+
+// module.exports = { registerUser };

@@ -1,42 +1,36 @@
-const Users = require('../../models/usersModel.js');  // példa, ha Mongoose-t használsz
+const User = require('../../models/User.js');
 
-async function getAllUsersBackend(req, res) {
+const getAllUsersBackend = async (req, res) => {
     try {
-        const users = await Users.find();
-        res.json(users);
+        const users = await User.find({});
+        res.status(200).render('users/users.ejs', { users });
     } catch (error) {
-        res.status(500).json({ msg: error.message });
+        res.status(404).render('404.ejs');
     }
-}
+};
 
-async function deleteOneUserBackend(req, res) {
-    try {
-        const { id } = req.params;
-        await Users.findByIdAndDelete(id);
-        res.json({ msg: "Felhasználó törölve!" });
-    } catch (error) {
-        res.status(500).json({ msg: error.message });
-    }
-}
-
-async function updateOneUserBackend(req, res) {
+const updateOneUserBackend = async (req, res) => {
     try {
         const { id, nev, email, admin } = req.body;
-
-        await Users.findByIdAndUpdate(id, {
-            nev,
-            email,
-            admin
-        });
-
-        res.json({ msg: "Felhasználó módosítva!" });
+        await User.findByIdAndUpdate(id, { nev, email, admin });
+        res.status(201).json({ msg: 'Sikeres módosítás!' });
     } catch (error) {
-        res.status(500).json({ msg: error.message });
+        res.status(500).json({ msg: 'Valami hiba! ' + error.message });
     }
-}
+};
+
+const deleteOneUserBackend = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await User.findByIdAndDelete(id);
+        res.status(200).json({ msg: 'Sikeres törlés!' });
+    } catch (error) {
+        res.status(500).json({ msg: 'Valami hiba történt! ' + error.message });
+    }
+};
 
 module.exports = {
     getAllUsersBackend,
-    deleteOneUserBackend,
-    updateOneUserBackend
+    updateOneUserBackend,
+    deleteOneUserBackend
 };

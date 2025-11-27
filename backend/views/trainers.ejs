@@ -6,7 +6,7 @@
         <title>Edzőink</title>
         <link
             rel="stylesheet"
-            href="trainers.css"
+            href="/css/trainers.css"
         />
     </head>
     <body>
@@ -16,17 +16,30 @@
         <p><a href="/api/new-trainer">Új edző felvétele</a></p>
 
         <ul id="trainers-list">
-            <% trainers.forEach(element => { %>
-            <p>Név: <%= element.nev %></p>
-            <p>Elérhetőség: <%= element.elerhetoseg %></p>
-            <img
-                src="<%= element.kep %>"
-                alt=""
-            />
-            <a class="modosit" href="/api/trainers-backend/<%= element._id %>">Módosítás</a>
-            <button class="torol" onclick="torles('<%= element._id%>')">Törlés</button>
-            <% }) %>
-        </ul>
+    <% trainers.forEach(element => { %>
+    <li class="trainer-card">
+        
+        <!-- KÉPTARTÓ – egységes arány -->
+        <div class="trainer-img-wrapper">
+            <img class="trainer-img" src="<%= element.kep %>" alt="Edző képe" />
+        </div>
+
+        <div class="trainer-info">
+            <h2><i class="fas fa-user"></i> <%= element.nev %></h2>
+            <p><i class="fas fa-phone"></i> <%= element.elerhetoseg %></p>
+        </div>
+
+        <div class="trainer-actions">
+            <a class="modosit" href="/api/trainers-backend/<%= element._id %>">
+                <i class="fas fa-edit"></i> Módosítás
+            </a>
+            <button class="torol" onclick="torles('<%= element._id%>')">
+                <i class="fas fa-trash"></i> Törlés
+            </button>
+        </div>
+    </li>
+    <% }) %>
+</ul>
         <script src="/js/trainer-kezel.js"></script>
     </body>
 </html>

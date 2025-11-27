@@ -1,4 +1,4 @@
-    async function fetchJson(path) {
+  async function fetchJson(path) {
   const res = await fetch(path);
   if (!res.ok) throw new Error('Hálózati hiba: ' + res.status);
   return res.json();
@@ -47,7 +47,7 @@ async function loadData() {
 
     const valasz = await response.json();
 
-    if (response.ok) {
+    if (response.ok) {  
         window.alert(valasz.msg);
         window.location = '/users-backend';
     } else {

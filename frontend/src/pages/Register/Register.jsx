@@ -12,6 +12,8 @@ export default function Register() {
   // 🔵 HIÁNYZÓ FUNKCIÓ BEÉPÍTVE
   async function regisztracio(event) {
     event.preventDefault();
+    console.log(nev, email, jelszo, jelszoUjra);
+    
 
     if (jelszo !== jelszoUjra) {
       window.alert("A jelszavak nem egyeznek!");

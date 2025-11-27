@@ -3,17 +3,41 @@ import "./Login.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    jelszo: ''
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Bejelentkezési adatok:", formData);
+
+    try {
+      const response = await fetch('http://localhost:3500/api/login-frontend', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: formData.email, jelszo: formData.jelszo })
+      });
+
+      const valasz = await response.json();
+      console.log(valasz);
+
+      if (response.ok) {
+        window.alert(valasz.msg);
+        localStorage.removeItem('isLoggedIn');
+        localStorage.setItem('isLoggedIn', 0);
+        localStorage.setItem('user', JSON.stringify(valasz.letezoUser[0]));
+        window.location.href = '/';
+      } else {
+        window.alert(valasz.msg);
+      }
+    } catch (err) {
+      console.error('Hiba a bejelentkezés során:', err);
+      alert('Hiba történt a bejelentkezés során.');
+    }
   };
 
   return (
@@ -34,9 +58,9 @@ const Login = () => {
         <label>Jelszó</label>
         <input
           type="password"
-          name="password"
+          name="jelszo"
           placeholder="Add meg a jelszót"
-          value={formData.password}
+          value={formData.jelszo}
           onChange={handleChange}
           required
         />

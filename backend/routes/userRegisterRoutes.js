@@ -1,14 +1,7 @@
 const express = require('express');
-const {
-  deleteOneUserBackend,
-  getAllUsersBackend,
-  updateOneUserBackend
-} = require('../../controllers/users/usersControllersBackend.js');
-
+const { registerUser } = require('../controllers/userRegisterControllers.js');
 const router = express.Router();
 
-router.get('/', getAllUsersBackend);
-router.put('/', updateOneUserBackend);
-router.delete('/:id', deleteOneUserBackend);
+router.post('/', registerUser);
 
 module.exports = router;
