@@ -1,3 +1,5 @@
+// server.js
+
 require('dotenv').config();
 
 const path = require('node:path');
@@ -33,6 +35,8 @@ app.use('/api', require('./routes/mainRoutes.js'));
 app.use('/api/users-backend', require('./routes/userRoutesBackend.js'));
 app.use('/api/trainers-backend', require('./routes/TrainersRoutesBackend.js'));
 app.use('/api/trainers-frontend',require('./routes/TrainersRoutesFrontend.js'));
+// ÚJ SOR: Útvonal az egyedi edző ID alapú lekéréséhez (TrainerDetails használja)
+app.use('/api/trainers', require('./routes/TrainersRoutesFrontend.js')); 
 app.use('/api/new-trainer', require('./routes/NewTrainersRoutesBackend.js'));
 
 // register es login panel es felhasznalok

@@ -28,8 +28,8 @@ const Login = () => {
       if (response.ok) {
         window.alert(valasz.msg);
         localStorage.removeItem('isLoggedIn');
-        localStorage.setItem('isLoggedIn', 0);
-        localStorage.setItem('user', JSON.stringify(valasz.letezoUser[0]));
+        localStorage.setItem('isLoggedIn', 1);
+        localStorage.setItem('user', JSON.stringify(valasz.letezoUser));
         window.location.href = '/';
       } else {
         window.alert(valasz.msg);

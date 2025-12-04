@@ -2,12 +2,17 @@ import { useState } from 'react';
 import Navbar from './Navbar';
 import './Trainers.css';
 import { useEffect } from 'react';
+// 1. ÚJ IMPORT: A useNavigate a navigációhoz
+import { useNavigate } from 'react-router-dom';
 
 const Trainers = () => {
     const [trainers, setTrainers] = useState([]);
+    // 2. NAVIGÁCIÓ INICIALIZÁLÁSA
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         const edzoLeker = async () => {
+            // ... adat lekérés
             const response = await fetch(
                 'http://localhost:3500/api/trainers-frontend'
             );
@@ -16,15 +21,22 @@ const Trainers = () => {
             console.log(adat.trainers);
 
             if (response.ok) {
-                // console.log(adat.trainer);
                 setTrainers(adat.trainers);
             } else {
-                window.alert(adat.msg);
+                // Fontos: lecseréltem window.alert-et console.error-ra a React gyakorlat szerint
+                console.error("Hiba az edzők lekérésekor:", adat.msg);
             }
         };
 
         edzoLeker();
     }, []);
+
+    // 3. ÚJ FÜGGVÉNY: Átirányít a részletes oldalra az ID alapján
+    const goToTrainerPage = (trainerId) => {
+        // Navigálás a /trainers/:id útvonalra
+        navigate(`/trainers/${trainerId}`); 
+    }
+
     return (
     <div className="gym-page">
         <Navbar />
@@ -67,17 +79,21 @@ const Trainers = () => {
 
             <div className="trainer-grid">
                 {trainers.map((t) => (
-                    <div className="trainer-card" key={t._id}>
+                    // 4. KATTINTHATÓ KÁRTYA: Hozzáadva az onClick eseménykezelő
+                    <div 
+                        className="trainer-card cursor-pointer hover:shadow-xl transition duration-300" 
+                        key={t._id} 
+                        onClick={() => goToTrainerPage(t._id)}
+                    >
                         <div className="trainer-img-wrap">
-                            <img src={t.kep} alt={t.nev} />
+                            <img src={t.kep || "https://placehold.co/100x100?text=Kép"} alt={t.nev} />
                         </div>
 
                         <h3 className="trainer-name">{t.nev}</h3>
 
-                        {/* <p className="trainer-about">{t.experience}</p> */}
                         <p className="trainer-about">{t.specialization}</p>
                         <p className="trainer-about">{t.elerhetoseg}</p>
-                        <p className="trainer-about">{t.ar}</p>
+                        <p className="trainer-about font-bold text-green-600">{t.ar}</p>
                     </div>
                 ))}
             </div>

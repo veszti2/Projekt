@@ -1,0 +1,201 @@
+/* -------------------------------------------------------------------------
+   Trainer Details Page Stílusok
+   Cél: Edzőtermi (Gym) stílus: Sötét, Arany-kiemeléses, Kompakt, SZŰK SÁVSZERŰ ELRENDEZÉS.
+------------------------------------------------------------------------- */
+
+/* Alapvető beállítások és háttér a teljes oldalhoz */
+.trainer-detail-page {
+    /* ÚJ HÁTTÉR: Mély, majdnem fekete (a gym-page #111-es stílusához hasonló) */
+    background-color: #111111; 
+    min-height: 100vh;
+    padding-top: 1.5rem; 
+    padding-bottom: 3rem;
+    /* Font megtartása 'Inter' (professzionális) és fehér szöveg */
+    font-family: 'Inter', sans-serif;
+    color: #f5f5f5; /* Nagyon világos (fehér) szöveg */
+    
+    /* ÚJ: Csak a tartalom szélességét korlátozzuk (a fejléccel együtt) */
+    max-width: 1000px; /* A fő tartalom maximális szélessége */
+    margin: 0 auto; /* Középre igazítja a teljes oldalt a képernyőn */
+}
+
+/* Edző profil képe és fejléce */
+.trainer-header {
+    /* Padding és margin csökkentése */
+    padding: 1.5rem 0;
+    margin-bottom: 1.5rem;
+    /* Határvonal: Finom arany vonal */
+    border-bottom: 2px solid #f5c542; 
+    /* Középre igazítás */
+    text-align: center;
+}
+
+.trainer-profile-img {
+    /* Keret színe most a kártya sötét színe */
+    border: 5px solid #1a1a1a; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Sötétebb árnyék */
+}
+
+.trainer-header h1 {
+    font-size: 2.2rem; 
+    font-weight: 700;
+    /* ÚJ: Arany kiemelő szín a címnek */
+    color: #f5c542; 
+    margin-top: 0.5rem;
+}
+
+/* Információs doboz (a fő kártya) */
+.trainer-info {
+    /* Kártya háttér: kissé világosabb, mint az oldal háttere */
+    background-color: #1a1a1a; 
+    border: 1px solid #333333; /* Finomabb sötét keret */
+    transition: all 0.3s ease;
+    /* Extra: lekerekített sarkok a letisztultabb stílusért */
+    border-radius: 0.75rem;
+    overflow: hidden; 
+    
+    /* ÚJ: További szélesség korlátozás a kártyára a tömörségért */
+    max-width: 800px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Információs grid (Speciális terület, Ár) */
+.trainer-info .grid > div {
+    /* Padding csökkentése */
+    padding: 0.75rem 1rem; 
+    /* A grid elemek háttére megegyezik a kártya hátterével */
+    background-color: #1a1a1a;
+    border: 1px solid #333333; /* Finom sötét határ */
+    /* Középre igazítás a grid elemeken belül */
+    text-align: center; 
+}
+
+.trainer-info p {
+    color: #f5f5f5; /* Minden szöveg világos */
+    line-height: 1.4; 
+}
+.trainer-info p.font-medium {
+    color: #cccccc; /* Halványabb címkék (pl. 'Ár', 'Speciális terület') */
+    font-size: 0.9rem; 
+}
+
+
+.trainer-info h2 {
+    /* ÚJ: Arany kiemelő szín a szekció címeknek */
+    color: #f5c542; 
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+    /* Határvonal sötétebb, elegánsabb */
+    border-bottom: 1px dashed #333333; 
+    /* Középre igazítás */
+    text-align: center;
+    font-size: 1.5rem; 
+}
+
+.trainer-info h3 {
+    color: #f5f5f5; /* Fehér alcímek */
+    font-weight: 600;
+    margin-top: 1rem; 
+    padding-top: 0.75rem; 
+    border-top: 1px solid #333333;
+    /* Középre igazítás */
+    text-align: center;
+}
+
+.trainer-description {
+    line-height: 1.6; 
+    color: #f5f5f5; 
+    /* A hosszú szöveget hagyjuk balra igazítva,
+       mivel a középre igazítás rontja az olvashatóságot. */
+    text-align: left;
+    padding: 1rem 1.5rem; 
+}
+
+/* Gomb stílus (Időpont foglalás) */
+.contact-button {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 1rem; 
+    /* ÚJ: Arany árnyék és háttér */
+    box-shadow: 0 4px 10px rgba(245, 197, 66, 0.4); 
+    
+    /* Gomb animáció és effektusok */
+    background-color: #f5c542; /* Arany alapszín */
+    color: #111111; /* Sötét szöveg az arany gombban */
+    padding: 0.6rem 1.2rem; 
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    font-weight: 700;
+    display: block;
+    margin: 1em auto;
+}
+
+
+p.kozepre {
+    margin: 1em auto;
+    text-align: center;
+}
+
+.contact-button:hover {
+    background-color: #e0b038; /* Sötétebb arany hover szín */
+    box-shadow: 0 6px 15px rgba(245, 197, 66, 0.6); 
+}
+
+.contact-button:active {
+    transform: scale(0.98); 
+}
+
+/* Kapcsolattartási adatok konténere */
+.contact-section {
+    margin-top: 1.5rem; 
+    text-align: center; 
+    padding: 1rem 0;
+}
+
+/* Kapcsolati adatok középre igazítása (pl. E-mail, Telefonszám) */
+.contact-details-item {
+    text-align: center;
+    margin-bottom: 0.4rem; 
+}
+.contact-details-item p {
+    text-align: center; 
+    color: #f5f5f5; /* Biztosan fehér szöveg */
+}
+
+#idopont-foglal {
+    background-color: #ebcc7e67;
+    position: absolute;   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+    height: 60%;
+    top: 20px;
+    left: 20px;
+}
+
+/* Responsiveness beállítások (közepes képernyőméretre) */
+@media (max-width: 768px) {
+    .trainer-detail-page {
+        padding-top: 1rem;
+        padding-left: 0.5rem; 
+        padding-right: 0.5rem;
+        max-width: 100%; /* Engedélyezzük, hogy mobil nézetben teljesen kitöltse a rendelkezésre álló helyet */
+    }
+    .trainer-header h1 {
+        font-size: 1.8rem;
+    }
+    .trainer-profile-img {
+        width: 100px; 
+        height: 100px;
+    }
+    .trainer-info h2 {
+        font-size: 1.3rem;
+    }
+    .trainer-info {
+        max-width: 100%; /* Mobilon is teljes szélesség, margin nélkül */
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

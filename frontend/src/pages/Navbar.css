@@ -1,5 +1,7 @@
 /* Navbar.css */
 
+/* ... (A korábbi stílusok, amik nem változtak, itt vannak) ... */
+
 nav a {
   margin: 0 20px 0 20px;
 }
@@ -19,12 +21,12 @@ nav a {
   box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
-/* Inner container */
+/* Inner container - EZ A RÉSZ FONTOS! */
 .navbar-inner {
-  display: flex;
+  display: flex; /* Flexbox bekapcsolása */
   align-items: center;
-  position: relative;
-  padding-left: 20px;
+  width: 100%; /* TELJES SZÉLESSÉG kihasználása a jobb oldali igazításhoz */
+  padding: 0 20px; /* Egyenletes bal/jobb padding a navbar-ban */
 }
 
 /* Logo fix balra */
@@ -33,7 +35,6 @@ nav a {
   font-weight: bold;
   color: #fff;
   cursor: pointer;
-  position: relative; /* a menühöz képest */
   z-index: 10;
   transition: color 0.3s ease, transform 0.3s ease;
   margin-right: 20px; 
@@ -44,30 +45,17 @@ nav a {
   transform: scale(1.05);
 }
 
-/* Navbar linkek - alapból rejtve, vízszintes, logó mellett jobbra */
+/* Navbar linkek - Főmenü */
 .navbar-links {
   list-style: none;
-  display: contents;
-  gap: 800px; /* linkek közötti távolság */
-  position: inherit;
-  top: 50%;
-  left: calc(100% + 10px); /* közvetlenül a logó mellett */
-  transform: translateY(-50%) translateX(0);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.1s ease, transform 0.1s ease;
-  z-index: 9;
+  display: flex; /* Flex-szé alakítás a linkek egymás melletti elrendezéséhez */
+  padding: 0;
+  margin: 0;
+  
+  /* A kulcsfontosságú sor! Ez kitolja az összes utána következő elemet a jobb oldalra */
+  margin-right: auto;
 }
 
-/* Hoverre megjelenik a menü */
-.navbar-logo:hover + .navbar-links,
-.navbar-links:hover {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(-50%) translateX(0);
-}
-
-/* Linkek stílusa */
 .navbar-links li a {
   display: block;
   padding: 8px 15px;
@@ -86,6 +74,22 @@ nav a {
   box-shadow: 0 0 25px rgb(168, 79, 16), 0 0 50px rgb(163, 7, 7);
 }
 
+
+/* === LOGIN / LOGOUT JOBBRA IGAZÍTÁS === */
+
+/* Ez a tároló tartalmazza a bejelentkezés/regisztráció linkeket VAGY a kilépés gombot */
+.register-links, 
+.navbar-inner > div:last-child { 
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+/* Regisztrációs linkek stílusa */
 .register-links a {
   display: block;
   padding: 8px 15px;
@@ -98,6 +102,28 @@ nav a {
 } 
 
 .register-links li a:hover {
+  background: linear-gradient(135deg, rgb(247, 231, 5), rgb(187, 8, 8));
+  transform: translateY(-3px);
+  color: #000;
+  box-shadow: 0 0 25px rgb(168, 79, 16), 0 0 50px rgb(163, 7, 7);
+}
+
+/* Kilépés gomb stílusa (a JSX szerint div > button) */
+.navbar-inner > div > button {
+  padding: 8px 15px;
+  background: #da9705;
+  color: #0a0000;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  white-space: nowrap;
+  transition: 0.2s ease, transform 0.2s ease;
+}
+
+/* Kilépés gomb hover effekt */
+.navbar-inner > div > button:hover {
   background: linear-gradient(135deg, rgb(247, 231, 5), rgb(187, 8, 8));
   transform: translateY(-3px);
   color: #000;
