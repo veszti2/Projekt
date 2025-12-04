@@ -7,6 +7,7 @@ const trainerSchema = new mongoose.Schema({
   experience: { type: String }, 
   ar: { type: Number },
   kep: { type: String },
+  foglalt: [{ type: String }],
 }, { timestamps: true });
 
 const TrainerModel = mongoose.model('trainer', trainerSchema);
