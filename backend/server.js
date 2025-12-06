@@ -30,20 +30,23 @@ dbConnect()
         console.error(`A hiba oka: ${error.message}`);
     });
 
-    // backend, frontedn, uj edzo bekerese
+// backend, frontedn, uj edzo bekerese
 app.use('/api', require('./routes/mainRoutes.js'));
 app.use('/api/users-backend', require('./routes/userRoutesBackend.js'));
 app.use('/api/trainers-backend', require('./routes/TrainersRoutesBackend.js'));
-app.use('/api/trainers-frontend',require('./routes/TrainersRoutesFrontend.js'));
+app.use(
+    '/api/trainers-frontend',
+    require('./routes/TrainersRoutesFrontend.js')
+);
 // ÚJ SOR: Útvonal az egyedi edző ID alapú lekéréséhez (TrainerDetails használja)
-app.use('/api/trainers', require('./routes/TrainersRoutesFrontend.js')); 
+app.use('/api/trainers', require('./routes/TrainersRoutesFrontend.js'));
 app.use('/api/new-trainer', require('./routes/NewTrainersRoutesBackend.js'));
 
 // register es login panel es felhasznalok
 app.use('/api/register-frontend', require('./routes/userRegisterRoutes.js'));
 app.use('/api/login-frontend', require('./routes/userLoginRoutes.js'));
+app.use('/api/idopont-foglal', require('./routes/idopontRoutes.js'));
 app.use('/api/users', require('./routes/users/usersRoutesBackend.js'));
-
 
 app.use((req, res) => {
     try {
