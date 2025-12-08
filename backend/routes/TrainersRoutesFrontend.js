@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-    getAllTrainersFrontend,
+    getAllTrainersFrontend,
     // ÚJ IMPORT: Ezt a funkciót kell majd hozzáadnod a controller fájlban
     getTrainerByIdFrontend, 
 } = require('../controllers/TrainersControllerFrontend.js');

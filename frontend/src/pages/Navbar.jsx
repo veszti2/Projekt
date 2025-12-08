@@ -40,6 +40,7 @@ function Navbar() {
           <li><Link to="/gym">Terem</Link></li>
           <li><Link to="/trainers">Edzők</Link></li>
           <li><Link to="/rules">Szabályzat</Link></li>
+          <li><Link to="/userProfile">Profil</Link></li>
           
           {isAdmin ?
           <li><a href="http://localhost:3500/api" target="_blank" rel="noopener noreferrer">Backend</a></li>

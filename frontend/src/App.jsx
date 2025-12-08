@@ -7,6 +7,7 @@ import Rules from './pages/Rules';
 import Login from './pages/Login/Login';
 import Navbar from './pages/Navbar';
 import Register from './pages/Register/Register';
+import  UserProfile from './pages/userProfile';
 // ÚJ IMPORT: Az egyedi edző oldal komponense
 import TrainerDetails from './pages/TrainerDetails'; 
 
@@ -26,6 +27,7 @@ function App() {
         <Route path='/rules' element={<Rules /> } />
         <Route path='/login' element={<Login /> } />
         <Route path='/register' element={<Register /> } />
+        <Route path='/userProfile' element={<UserProfile /> } />
       </Routes>
     </BrowserRouter>
     </>

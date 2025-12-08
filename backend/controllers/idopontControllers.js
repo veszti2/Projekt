@@ -1,11 +1,14 @@
 const Trainer = require('../models/Trainer.js');
+const User = require('../models/User.js');
+const Reservation = require('../models/Reservation.js');
 
 exports.updateIdopont = async (req, res) => {
     try {
         const { id } = req.params;
-        const { selectedDate, selectedTime } = req.body;
-        console.log({ id, selectedDate, selectedTime });
+        const { userid, selectedDate, selectedTime } = req.body;
+        console.log({ id, userid, selectedDate, selectedTime });
         const trainer = await Trainer.findById({ _id: id });
+        const user = await User.findById({ _id: userid });
         console.log(trainer);
 
         await Trainer.findByIdAndUpdate(
@@ -19,6 +22,9 @@ exports.updateIdopont = async (req, res) => {
                 },
             }
         );
+
+        const newReservation = new Reservation({user, trainer, idopont: `${selectedDate},${selectedTime}`});
+        await newReservation.save();
 
         console.log([...trainer.foglalt, `${selectedDate},${selectedTime}`]);
 

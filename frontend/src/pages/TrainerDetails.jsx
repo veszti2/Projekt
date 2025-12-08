@@ -50,11 +50,17 @@ const TrainerDetails = () => {
     const [trainer, setTrainer] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [user, setUser] = useState(null);
 
     // Állapot a modal láthatóságához
     const [isModalOpen, setIsModalOpen] = useState(false);
     // A mai dátum a naptár korlátozásához
     const today = new Date().toISOString().split('T')[0];
+    useEffect(() => {
+        const userL = JSON.parse(localStorage.getItem('user'));
+        console.log(userL);
+        setUser(userL);
+    }, [])
 
     useEffect(() => {
         const fetchTrainerDetails = async () => {
@@ -222,6 +228,7 @@ ADATBÁZIS MENTÉS IDE JÖN! (Küldd el ezt az adatot a backendnek POST kéréss
                 onClose={() => setIsModalOpen(false)}
                 // trainerId={trainer._id}
                 // trainerName={trainer.nev}
+                user={user}
                 trainer={trainer}
                 today={today}
                 // Ez a függvény adja át a foglalt adatokat a generateAvailableTimes-nek

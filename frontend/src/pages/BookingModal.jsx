@@ -5,6 +5,7 @@ import './BookingModal.css';
 const BookingModal = ({
     isOpen,
     onClose,
+    user,
     trainer,
     // trainerId,
     // trainerName,
@@ -40,7 +41,7 @@ const BookingModal = ({
                 headers: {
                     'Content-type': 'application/json',
                 },
-                body: JSON.stringify({ selectedDate, selectedTime }),
+                body: JSON.stringify({ userid: user._id, selectedDate, selectedTime }),
             }
         );
 
