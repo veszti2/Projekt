@@ -4,7 +4,6 @@ const Gymsplit = require('../models/Gymsplit.js');
 
 // Felhasználók
 exports.getAllUsersBackend = async (req, res) => {
-<<<<<<< HEAD
     try {
         const users = await User.find({});
         const reservations = await Reservation.find({})
@@ -20,14 +19,6 @@ exports.getAllUsersBackend = async (req, res) => {
             error: err.message,
         });
     }
-=======
-  try {
-    const users = await User.find({});  
-    return res.render('users/users.ejs', {users});
-  } catch (err) {
-    res.status(500).json({ message: 'Hiba a felhasználók lekérésekor', error: err.message });
-  }
->>>>>>> 4c0fbaa7e1270725baf0e7c29b426da9cba0d3fc
 };
 
 exports.getUserById = async (req, res) => {
