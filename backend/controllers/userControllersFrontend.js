@@ -1,13 +1,18 @@
 const User = require('../models/User.js');
-// backend/controllers/UserControllerBackend.js
-const Trainer = require('../models/Trainers.js');
+const Reservation = require('../models/Reservation.js');
 const Gymsplit = require('../models/Gymsplit.js');
 
 // Felhasználók
-exports.getAllUsersBackend = async (req, res) => {
+exports.getAllUsersFrontend = async (req, res) => {
     try {
-        const users = await User.find().lean();
-        res.json(users);
+        const users = await User.find({});
+        const reservations = await Reservation.find({})
+            .populate('user')
+            .populate('trainer');
+        console.log(users);
+        console.log(reservations);
+
+        return res.json({ users, reservations });
     } catch (err) {
         res.status(500).json({
             message: 'Hiba a felhasználók lekérésekor',
@@ -16,14 +21,22 @@ exports.getAllUsersBackend = async (req, res) => {
     }
 };
 
-exports.getUserById = async (req, res) => {
+exports.getOneUserFrontend = async (req, res) => {
     try {
-        const user = await User.findById(req.params.id).lean();
+        const { id } = req.params;
+        const user = await User.findById({ _id: id });
+        const reservations = await Reservation.find({})
+            .populate('user')
+            .populate('trainer');
+
+        const reser = reservations.filter((elem) => elem.user._id === id);
+        console.log(reser);
+
         if (!user)
             return res
                 .status(404)
                 .json({ message: 'Felhasználó nem található' });
-        res.json(user);
+        return res.json({ reser });
     } catch (err) {
         res.status(500).json({
             message: 'Hiba a felhasználó lekérésekor',

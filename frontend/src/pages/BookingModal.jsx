@@ -34,6 +34,11 @@ const BookingModal = ({
     const elkuld = async (e) => {
         e.preventDefault();
 
+        if (!user) {
+            window.alert('Az időpont foglaláshoz be kell jelentkezned!');
+            return;
+        }
+
         const response = await fetch(
             `http://localhost:3500/api/idopont-foglal/${trainer._id}`,
             {
@@ -41,7 +46,11 @@ const BookingModal = ({
                 headers: {
                     'Content-type': 'application/json',
                 },
-                body: JSON.stringify({ userid: user._id, selectedDate, selectedTime }),
+                body: JSON.stringify({
+                    userid: user._id,
+                    selectedDate,
+                    selectedTime,
+                }),
             }
         );
 

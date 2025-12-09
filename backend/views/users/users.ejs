@@ -55,6 +55,14 @@
                             </td>
                         </tr>
                     </table>
+                    <h2>Foglalások:</h2>
+                    <% for( let index = 0; index < reservations.length; index++)
+                    { %> <% if (String(reservations[index].user._id) ===
+                    String(elem._id)) { %>
+                    <p>Időpont: <%= reservations[index].idopont %></p>
+                    <p>Edző: <%= reservations[index].trainer.nev %></p>
+                    <% } %> <% } %>
+
                     <div id="felhasznalo-gombok">
                         <button
                             onclick="modosit('<%= elem._id %>', '<%= elem.nev %>', '<%= elem.email %>', 'admin_<%= elem.email%>')"

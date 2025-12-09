@@ -33,6 +33,7 @@ dbConnect()
 // backend, frontedn, uj edzo bekerese
 app.use('/api', require('./routes/mainRoutes.js'));
 app.use('/api/users-backend', require('./routes/userRoutesBackend.js'));
+app.use('/api/users-frontend', require('./routes/userRoutesFrontend.js'));
 app.use('/api/trainers-backend', require('./routes/TrainersRoutesBackend.js'));
 app.use(
     '/api/trainers-frontend',
@@ -47,7 +48,7 @@ app.use('/api/register-frontend', require('./routes/userRegisterRoutes.js'));
 app.use('/api/login-frontend', require('./routes/userLoginRoutes.js'));
 app.use('/api/idopont-foglal', require('./routes/idopontRoutes.js'));
 app.use('/api/users', require('./routes/users/usersRoutesBackend.js'));
-    
+
 app.use((req, res) => {
     try {
         res.status(404);
