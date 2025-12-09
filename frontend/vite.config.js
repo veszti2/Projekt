@@ -1,7 +1,12 @@
+// vite.config.js
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react' // Vagy a használt plugin (Vue, Svelte, stb.)
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  // Ezt a sort kell ellenőrizni és beállítani:
+  base: './', 
+  
+  // A többi beállítás maradjon
+  plugins: [react()], 
+  // ...
 })
