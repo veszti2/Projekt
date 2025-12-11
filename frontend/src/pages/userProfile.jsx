@@ -162,11 +162,10 @@ const initialUserProfile = {
 };
 
 function UserProfile() {
-    // const [user, setUser] = useState({});
+    const [user, setUser] = useState({});
     const [reservations, setReservations] = useState([]);
-    const [profilePicture, setProfilePicture] = useState(
-        initialUserProfile.profilePictureUrl
-    );
+    const [initialUserProfile, setInitialUserProfile] = useState({});
+    const [profilePicture, setProfilePicture] = useState(null);
     const [isAvatarPanelOpen, setIsAvatarPanelOpen] = useState(false);
 
     const fileInputRef = useRef(null);
@@ -176,6 +175,7 @@ function UserProfile() {
     useEffect(() => {
         const userL = JSON.parse(localStorage.getItem('user'));
         console.log(userL);
+        setUser(userL);
 
         try {
             const leker = async () => {
@@ -197,6 +197,7 @@ function UserProfile() {
                     });
                     console.log(reser);
                     setReservations(reser);
+                    setInitialUserProfile(userL);
                 }
             };
 
@@ -216,6 +217,7 @@ function UserProfile() {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
+            
             reader.onloadend = () => {
                 setProfilePicture(reader.result);
             };
@@ -223,9 +225,24 @@ function UserProfile() {
         }
     };
 
-    const handleAvatarSelect = (avatarUrl) => {
+    const handleAvatarSelect = async (avatarUrl) => {
         setProfilePicture(avatarUrl);
         setIsAvatarPanelOpen(false);
+        console.log(user);
+        
+        
+        try {
+            const response = await fetch(`http://localhost:3500/api/users-frontend/${user._id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({avatarUrl})
+            });
+
+        } catch (error) {
+            console.log(error.message);
+        }
     };
 
     const toggleAvatarPanel = () => {
@@ -357,7 +374,7 @@ function UserProfile() {
                         title="Kattints a saját kép feltöltéséhez (vagy használd az Avatárválasztót)"
                     >
                         <img
-                            src={profilePicture}
+                            src={profilePicture ? profilePicture :  initialUserProfile.avatar}
                             alt={`Profilkép - ${initialUserProfile.name}`}
                             className="profile-pic"
                         />
@@ -410,7 +427,7 @@ function UserProfile() {
                         </ul>
                     </section>
 
-                    <section className="profile-section">
+                    {/* <section className="profile-section">
                         <h3 className="section-title">Képességek</h3>
                         <ul className="skills-list">
                             {initialUserProfile.skills.map((skill, index) => (
@@ -422,7 +439,7 @@ function UserProfile() {
                                 </li>
                             ))}
                         </ul>
-                    </section>
+                    </section> */}
                 </div>
             </div>
         </div>

@@ -9,8 +9,8 @@ exports.getAllUsersFrontend = async (req, res) => {
         const reservations = await Reservation.find({})
             .populate('user')
             .populate('trainer');
-        console.log(users);
-        console.log(reservations);
+        // console.log(users);
+        // console.log(reservations);
 
         return res.json({ users, reservations });
     } catch (err) {
@@ -30,7 +30,7 @@ exports.getOneUserFrontend = async (req, res) => {
             .populate('trainer');
 
         const reser = reservations.filter((elem) => elem.user._id === id);
-        console.log(reser);
+        // console.log(reser);
 
         if (!user)
             return res
@@ -45,12 +45,17 @@ exports.getOneUserFrontend = async (req, res) => {
     }
 };
 
-exports.createUser = async (req, res) => {
+exports.updateOneUserFrontend = async (req, res) => {
     try {
-        const { name, email, passwordHash, role } = req.body;
-        const user = new User({ name, email, passwordHash, role });
-        await user.save();
-        res.status(201).json(user);
+        const { id } = req.params;
+        const { avatarUrl } = req.body;
+        console.log(avatarUrl);
+        
+        
+        const user = await User.findByIdAndUpdate({_id: id}, { $set: {avatar: avatarUrl}});
+        console.log(user);
+        
+        res.status(201).json({msg: 'Sikeres frissítés!'});
     } catch (err) {
         res.status(400).json({
             message: 'Hiba a felhasználó létrehozásakor',

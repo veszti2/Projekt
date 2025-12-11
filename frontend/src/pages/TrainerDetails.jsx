@@ -8,38 +8,48 @@ import BookingModal from './BookingModal';
 // Szimulált Időpont Sávok Generálása és Állapotának Kiszámítása
 // -----------------------------------------------------------
 const generateAvailableTimes = (date, bookedTimes = []) => {
+    // A mai nap dátuma (YYYY-MM-DD formátumban)
+    const todayString = new Date().toISOString().split('T')[0];
+    // A jelenlegi idő
+    const now = new Date();
+
     // Ha nincs dátum kiválasztva, vagy a dátum a múltban van, üres tömböt ad vissza.
-    if (!date || new Date(date) < new Date(new Date().toDateString()))
+    if (!date || new Date(date) < new Date(todayString))
         return [];
+    
     // Ideális idősávok, amikben az edző elvileg dolgozik (Pl. 30 percenként)
     const allTimes = [
-        '09:00',
-        '09:30',
-        '10:00',
-        '10:30',
-        '11:00',
-        '11:30',
-        '12:00',
-        '12:30',
-        '14:00',
-        '14:30',
-        '15:00',
-        '15:30',
-        '16:00',
-        '16:30',
+        '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
+        '12:00', '12:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30',
     ];
+
     // 1. Kiszűrjük azokat az időpontokat a 'foglalt' listából, amelyek a selectedDate napra vonatkoznak
-    // Feltételezzük, hogy a foglalt objektumok: { date: 'YYYY-MM-DD', time: 'HH:MM' }
     const timesBookedOnSelectedDate = bookedTimes
         .filter((booking) => booking.date === date)
         .map((booking) => booking.time);
 
     // 2. Létrehozzuk az összes időpont listáját az állapotukkal együtt
-    const allSlots = allTimes.map((time) => ({
-        time: time,
-        // Ha az időpont benne van a foglalt listában, akkor isBooked: true
-        isBooked: timesBookedOnSelectedDate.includes(time),
-    }));
+    const allSlots = allTimes.map((time) => {
+        
+        // --- IDŐPONT ELLENŐRZÉS MÚLT BELI ÁLLAPOTRA ---
+        
+        // Létrehozunk egy teljes dátum/idő objektumot az aktuális időpontból
+        const [hour, minute] = time.split(':').map(Number);
+        const slotDateTime = new Date(date);
+        slotDateTime.setHours(hour, minute, 0, 0); // Beállítjuk az időpontot
+
+        // A sáv MÚLTBAN VAN-E? (Csak a mai napon kell vizsgálni)
+        const isPast = (date === todayString) && (slotDateTime < now);
+        
+        // --------------------------------------------
+
+        return {
+            time: time,
+            // Ha az időpont benne van a foglalt listában VAGY a múltban van a mai napon, akkor isBooked: true
+            isBooked: timesBookedOnSelectedDate.includes(time) || isPast,
+            isPast: isPast, // Extraként, a formázáshoz jól jöhet
+        };
+    });
 
     return allSlots;
 };
@@ -56,6 +66,7 @@ const TrainerDetails = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     // A mai dátum a naptár korlátozásához
     const today = new Date().toISOString().split('T')[0];
+    
     useEffect(() => {
         const userL = JSON.parse(localStorage.getItem('user'));
         console.log(userL);
@@ -169,7 +180,7 @@ ADATBÁZIS MENTÉS IDE JÖN! (Küldd el ezt az adatot a backendnek POST kéréss
         <>
             <Navbar />
             <div className="trainer-detail-page">
-                               {/* Fejléc */}
+                               {/* Fejléc */}
                 <div className="trainer-header">
                     <img
                         src={
@@ -198,12 +209,12 @@ ADATBÁZIS MENTÉS IDE JÖN! (Küldd el ezt az adatot a backendnek POST kéréss
                             </p>
                         </div>
                     </div>
-                                       <h3>Bemutatkozás és módszer</h3>
+                                        <h3>Bemutatkozás és módszer</h3>
                     <p className="trainer-description">
                         {trainer.experience ||
                             'Jelenleg nincs részletes leírás a backendről. Ideális esetben itt jelenne meg az edző tapasztalata, filozófiája, és az, hogy milyen eredményeket ért el korábban az ügyfeleivel.'}
                     </p>
-                                       <h3>Kapcsolat</h3>
+                                        <h3>Kapcsolat</h3>
                     <div className="contact-info">
                         <p className="contact-email">
                             E-mail:{' '}
@@ -211,7 +222,7 @@ ADATBÁZIS MENTÉS IDE JÖN! (Küldd el ezt az adatot a backendnek POST kéréss
                                 {trainer.elerhetoseg || '—'}
                             </span>
                         </p>
-                                               {/* GOMB: Modal megnyitása */}
+                                        {/* GOMB: Modal megnyitása */}
                         <button
                             className="book-button"
                             onClick={() => setIsModalOpen(true)}
