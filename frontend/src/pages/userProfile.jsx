@@ -1,5 +1,7 @@
+import { useContext } from 'react';
 import './userProfile.css';
 import { useState, useEffect, useRef } from 'react';
+import { logoContext } from '../App';
 
 // -------------------------------------------------------------
 // 🏋️‍♀️ AVATÁR ADATOK (Edzés Témájú Rajzolt Ikonok)
@@ -167,6 +169,7 @@ function UserProfile() {
     const [initialUserProfile, setInitialUserProfile] = useState({});
     const [profilePicture, setProfilePicture] = useState(null);
     const [isAvatarPanelOpen, setIsAvatarPanelOpen] = useState(false);
+    const { setLogo } = useContext(logoContext);
 
     const fileInputRef = useRef(null);
 
@@ -197,6 +200,7 @@ function UserProfile() {
                     });
                     console.log(reser);
                     setReservations(reser);
+                    setLogo(userL.avatar);
                     setInitialUserProfile(userL);
                 }
             };
@@ -217,7 +221,7 @@ function UserProfile() {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
-            
+
             reader.onloadend = () => {
                 setProfilePicture(reader.result);
             };
@@ -227,19 +231,21 @@ function UserProfile() {
 
     const handleAvatarSelect = async (avatarUrl) => {
         setProfilePicture(avatarUrl);
+        setLogo(avatarUrl);
         setIsAvatarPanelOpen(false);
         console.log(user);
-        
-        
-        try {
-            const response = await fetch(`http://localhost:3500/api/users-frontend/${user._id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({avatarUrl})
-            });
 
+        try {
+            const response = await fetch(
+                `http://localhost:3500/api/users-frontend/${user._id}`,
+                {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ avatarUrl }),
+                }
+            );
         } catch (error) {
             console.log(error.message);
         }
@@ -374,7 +380,11 @@ function UserProfile() {
                         title="Kattints a saját kép feltöltéséhez (vagy használd az Avatárválasztót)"
                     >
                         <img
-                            src={profilePicture ? profilePicture :  initialUserProfile.avatar}
+                            src={
+                                profilePicture
+                                    ? profilePicture
+                                    : initialUserProfile.avatar
+                            }
                             alt={`Profilkép - ${initialUserProfile.name}`}
                             className="profile-pic"
                         />

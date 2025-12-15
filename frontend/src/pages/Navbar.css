@@ -18,7 +18,7 @@ nav a {
     left: 0;
     z-index: 1000;
     font-family: Arial, sans-serif;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* Inner container - EZ A RÉSZ FONTOS! */
@@ -74,7 +74,6 @@ nav a {
     box-shadow: 0 0 25px rgb(168, 79, 16), 0 0 50px rgb(163, 7, 7);
 }
 
-
 /* === LOGIN / LOGOUT JOBBRA IGAZÍTÁS === */
 
 /* Ez a tároló tartalmazza a bejelentkezés/regisztráció linkeket VAGY a kilépés gombot */
@@ -87,7 +86,6 @@ nav a {
     padding: 0;
     margin: 0;
 }
-
 
 /* Regisztrációs linkek stílusa */
 .register-links a {
@@ -155,4 +153,25 @@ nav a {
     transform: translateY(-3px);
     color: #000;
     box-shadow: 0 0 25px rgb(168, 79, 16), 0 0 50px rgb(163, 7, 7);
+}
+
+.logo-kontener {
+    display: flex;
+    flex-direction: row;
+    height: 34px;
+    position: relative;
+}
+
+.logo-kontener a {
+    height: 18px;
+    padding: 8px 15px;
+    width: 100px;
+    position: relative;
+}
+
+.logo-kontener img {
+    position: absolute;
+    left: 100px;
+    width: 30px;
+    height: 100%;
 }

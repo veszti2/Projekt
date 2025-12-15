@@ -2,8 +2,11 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { logoContext } from '../App';
+import { useContext } from 'react';
 
 function Navbar() {
+    const { logo } = useContext(logoContext);
     const [isLoggedIn, setIsLoggedIn] = useState(0);
     const [isAdmin, setIsAdmin] = useState(false);
 
@@ -79,7 +82,13 @@ function Navbar() {
                     <div>
                         <button onClick={kilep}>Kilép</button>
                         <li>
-                            <Link to="/userProfile">Profil</Link>
+                            <div className="logo-kontener">
+                                <Link to="/userProfile">Profil</Link>
+                                <img
+                                    src={logo}
+                                    alt=""
+                                />
+                            </div>
                         </li>
                     </div>
                 )}

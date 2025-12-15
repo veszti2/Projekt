@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home'
+import Home from './pages/Home';
 import About from './pages/About';
 import Gym from './pages/Gym';
 import Trainers from './pages/Trainers';
@@ -7,31 +7,75 @@ import Rules from './pages/Rules';
 import Login from './pages/Login/Login';
 import Navbar from './pages/Navbar';
 import Register from './pages/Register/Register';
-import  UserProfile from './pages/userProfile';
+import UserProfile from './pages/userProfile';
 // ÚJ IMPORT: Az egyedi edző oldal komponense
-import TrainerDetails from './pages/TrainerDetails'; 
+import TrainerDetails from './pages/TrainerDetails';
+import { createContext } from 'react';
+import { useState } from 'react';
+
+export const logoContext = createContext();
 
 function App() {
-
-  return (
-    <>
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Home /> } />
-        <Route path='/about' element={<About /> } />
-        <Route path='/gym' element={<Gym /> } />
-        <Route path='/trainers' element={<Trainers /> } />
-        {/* ÚJ ÚTVONAL: Ez kezeli a /trainers/bármilyenID formátumot */}
-        <Route path='/trainers/:id' element={<TrainerDetails /> } /> 
-        <Route path='/rules' element={<Rules /> } />
-        <Route path='/login' element={<Login /> } />
-        <Route path='/register' element={<Register /> } />
-        <Route path='/userProfile' element={<UserProfile /> } />
-      </Routes>
-    </BrowserRouter>
-    </>
-  )
+    const [logo, setLogo] = useState('');
+    return (
+        <logoContext.Provider value={{ logo, setLogo }}>
+               {' '}
+            <BrowserRouter>
+                      <Navbar />     {' '}
+                <Routes>
+                           {' '}
+                    <Route
+                        path="/"
+                        element={<Home />}
+                    />
+                           {' '}
+                    <Route
+                        path="/about"
+                        element={<About />}
+                    />
+                           {' '}
+                    <Route
+                        path="/gym"
+                        element={<Gym />}
+                    />
+                           {' '}
+                    <Route
+                        path="/trainers"
+                        element={<Trainers />}
+                    />
+                    {/* ÚJ ÚTVONAL: Ez kezeli a /trainers/bármilyenID formátumot */}
+                           {' '}
+                    <Route
+                        path="/trainers/:id"
+                        element={<TrainerDetails />}
+                    />
+                           {' '}
+                    <Route
+                        path="/rules"
+                        element={<Rules />}
+                    />
+                           {' '}
+                    <Route
+                        path="/login"
+                        element={<Login />}
+                    />
+                           {' '}
+                    <Route
+                        path="/register"
+                        element={<Register />}
+                    />
+                           {' '}
+                    <Route
+                        path="/userProfile"
+                        element={<UserProfile />}
+                    />
+                         {' '}
+                </Routes>
+                   {' '}
+            </BrowserRouter>
+               {' '}
+        </logoContext.Provider>
+    );
 }
 
-export default App
+export default App;
