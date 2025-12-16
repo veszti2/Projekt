@@ -1,11 +1,5 @@
 /* Navbar.css */
 
-/* ... (A korábbi stílusok, amik nem változtak, itt vannak) ... */
-
-nav a {
-    margin: 0 20px 0 20px;
-}
-
 /* Alap navbar */
 .navbar {
     width: 100%;
@@ -27,6 +21,8 @@ nav a {
     align-items: center;
     width: 100%; /* TELJES SZÉLESSÉG kihasználása a jobb oldali igazításhoz */
     padding: 0 20px; /* Egyenletes bal/jobb padding a navbar-ban */
+    max-width: 1400px; /* Megkötjük a maximális szélességet, ha van külső 'container' */
+    margin: 0 auto;
 }
 
 /* Logo fix balra */
@@ -65,6 +61,7 @@ nav a {
     border-radius: 15px;
     transition: 0.2s ease, transform 0.2s ease;
     white-space: nowrap;
+    margin: 0 5px; /* Hely a linkek között */
 }
 
 .navbar-links li a:hover {
@@ -106,32 +103,6 @@ nav a {
     box-shadow: 0 0 25px rgb(168, 79, 16), 0 0 50px rgb(163, 7, 7);
 }
 
-/* === PROFIL LINK STÍLUS BEÁLLÍTÁSA BEJELENTKEZÉS UTÁN - ÚJ KÓD === */
-
-/* A bejelentkezett felhasználó konténerében lévő listaelem */
-.navbar-inner > div:last-child li {
-    list-style: none;
-}
-
-/* A profil link (a) stílusa - Ugyanaz mint a főmenüben */
-.navbar-inner > div:last-child li a {
-    display: block;
-    padding: 8px 15px;
-    background: #da9705;
-    color: #0a0000;
-    text-decoration: none;
-    border-radius: 15px;
-    transition: 0.2s ease, transform 0.2s ease;
-    white-space: nowrap;
-}
-
-/* Profil link hover effekt - Ugyanaz mint a főmenüben */
-.navbar-inner > div:last-child li a:hover {
-    background: linear-gradient(135deg, rgb(247, 231, 5), rgb(187, 8, 8));
-    transform: translateY(-3px);
-    color: #000;
-    box-shadow: 0 0 25px rgb(168, 79, 16), 0 0 50px rgb(163, 7, 7);
-}
 
 /* Kilépés gomb stílusa (a JSX szerint div > button) */
 .navbar-inner > div > button {
@@ -155,23 +126,64 @@ nav a {
     box-shadow: 0 0 25px rgb(168, 79, 16), 0 0 50px rgb(163, 7, 7);
 }
 
+
+/* ======================================================= */
+/* 🚀 PROFIL GOMB ÉS AVATÁR KONTÉNER STÍLUSJAVÍTÁS 🚀 */
+/* ======================================================= */
+
 .logo-kontener {
+    /* Flexbox használata a Link és az Img elegáns elrendezéséhez */
     display: flex;
-    flex-direction: row;
-    height: 34px;
-    position: relative;
+    align-items: center; /* Függőlegesen középre igazítás */
+    gap: 8px; /* Kis tér a link és a kép között */
+    height: 38px; /* Magasabb, mint az alap link, hogy beférjen az avatár */
+    
+    /* A profil gomb kinézete */
+    background: #da9705; 
+    border-radius: 15px;
+    padding: 0 8px 0 15px; /* Padding beállítása: bal oldalon nagyobb, hogy a link szövege kényelmes legyen */
+    transition: 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Hover effekt a teljes konténerre, hogy egységes legyen */
+.logo-kontener:hover {
+    background: linear-gradient(135deg, rgb(247, 231, 5), rgb(187, 8, 8));
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgb(168, 79, 16), 0 0 50px rgb(163, 7, 7);
+    cursor: pointer;
+}
+
+/* A Link stílusa a konténeren belül */
 .logo-kontener a {
-    height: 18px;
-    padding: 8px 15px;
-    width: 100px;
-    position: relative;
+    /* Minden korábbi pozicionálási stílus felülírása */
+    all: unset; 
+    
+    /* A link szövegének stílusa */
+    color: #0a0000;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    white-space: nowrap;
 }
 
+/* A kép (Avatár/Logo) stílusa */
 .logo-kontener img {
-    position: absolute;
-    left: 100px;
-    width: 30px;
-    height: 100%;
+    /* Minden korábbi pozicionálási stílus felülírása */
+    position: static; 
+    
+    width: 32px; 
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%; /* Kör alakú kép */
+    border: 2px solid #0a0000; /* Kis kontrasztos keret */
 }
+
+/* A bejelentkezett felhasználó konténerében lévő listaelem (a JSX miatt szükséges) */
+.navbar-inner > div:last-child li {
+    list-style: none;
+    display: flex; /* Hogy a li ne okozzon törést */
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+

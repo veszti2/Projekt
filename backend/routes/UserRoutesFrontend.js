@@ -4,10 +4,11 @@ const {
     getOneUserFrontend,
     updateOneUserFrontend,
 } = require('../controllers/userControllersFrontend.js');
+const pictureUploader = require('../middlewares/pictureUpload.js');
 const router = express.Router();
 
 router.get('/', getAllUsersFrontend);
 router.get('/:id', getOneUserFrontend);
-router.patch('/:id', updateOneUserFrontend);
+router.patch('/:id', pictureUploader, updateOneUserFrontend);
 
 module.exports = router;

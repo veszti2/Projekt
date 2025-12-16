@@ -33,4 +33,20 @@ async function modositUser(id, nev, email, admin) {
     }
 }
 
+async function idopont_torles() {
+    try {
+        const response = await fetch(
+            'http://localhost:3500/api/users-backend',
+            {
+                method: 'DELETE',
+            }
+        );
+
+        return await response.json();
+    } catch (error) {
+        console.log('Backend hiba:', error.message);
+        throw error;
+    }
+}
+
 // module.exports = { torolUser, modositUser };

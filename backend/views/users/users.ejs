@@ -16,6 +16,7 @@
         <%- include('../nav.ejs') %>
         <div id="felhasznalo-kontener">
             <h1>Felhasználók</h1>
+            <button onclick="idopont_torles()">Régi időpontok törlése</button>
             <div id="felhasznalok-kontener">
                 <% users.forEach(elem => { %>
                 <div class="felhasznalo-egy-kontener">

@@ -84,3 +84,19 @@ exports.deleteUser = async (req, res) => {
         });
     }
 };
+
+exports.deleteReservation = async (req, res) => {
+    try {
+        const removed = await User.findByIdAndDelete(req.params.id).lean();
+        if (!removed)
+            return res
+                .status(404)
+                .json({ message: 'Felhasználó nem található' });
+        res.json({ message: 'Törölve', removed });
+    } catch (err) {
+        res.status(500).json({
+            message: 'Hiba a felhasználó törlésekor',
+            error: err.message,
+        });
+    }
+};

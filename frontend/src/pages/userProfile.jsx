@@ -1,3 +1,5 @@
+// Userprofile.jsx (TELJES KÓD)
+
 import { useContext } from 'react';
 import './userProfile.css';
 import { useState, useEffect, useRef } from 'react';
@@ -141,10 +143,10 @@ const MALE_AVATAR_COUNT = MALE_AVATARS.length;
 const FEMALE_AVATAR_COUNT = FEMALE_AVATARS.length;
 
 // -------------------------------------------------------------
-// Kezdeti felhasználói adatok
+// Kezdeti felhasználói adatok (Statikus adatok a kitöltéshez)
 // -------------------------------------------------------------
 
-const initialUserProfile = {
+const initialUserProfileStatic = {
     name: 'Felhasználó',
     title: 'Frontend Fejlesztő',
     location: 'Budapest, Magyarország',
@@ -166,50 +168,71 @@ const initialUserProfile = {
 function UserProfile() {
     const [user, setUser] = useState({});
     const [reservations, setReservations] = useState([]);
-    const [initialUserProfile, setInitialUserProfile] = useState({});
+    const [initialUserProfile, setInitialUserProfile] = useState(initialUserProfileStatic); // Kezdeti statikus adatokkal feltöltve
+    const [selectedPicture, setSelectedPicture] = useState('');
     const [profilePicture, setProfilePicture] = useState(null);
     const [isAvatarPanelOpen, setIsAvatarPanelOpen] = useState(false);
+    
+    // ------------------------------
+    // ÚJ ÁLLAPOTOK AZ EGYEDI ALERT-HEZ
+    // ------------------------------
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState({ msg: '', isSuccess: true });
+    // ------------------------------
+
     const { setLogo } = useContext(logoContext);
 
     const fileInputRef = useRef(null);
 
-    // useEffect(() => {}, []);
+    const fetchReservations = async (userL) => {
+        try {
+            const response = await fetch(
+                `http://localhost:3500/api/users-frontend/`
+            );
+
+            const valasz = await response.json();
+
+            if (response.ok) {
+                const reservationsF = valasz.reservations;
+                const reser = reservationsF.filter((elem) => {
+                    return elem.user._id === userL._id;
+                });
+                console.log(reser);
+                setReservations(reser);
+                setLogo(userL.avatar);
+                setInitialUserProfile(userL);
+            }
+        } catch (error) {
+            console.log(error.message);
+            // Hiba esetén is feltöltjük az alapértelmezett adatokat
+            setInitialUserProfile(userL || initialUserProfileStatic); 
+        }
+    };
 
     useEffect(() => {
         const userL = JSON.parse(localStorage.getItem('user'));
         console.log(userL);
         setUser(userL);
-
-        try {
-            const leker = async () => {
-                const response = await fetch(
-                    `http://localhost:3500/api/users-frontend/`
-                );
-
-                const valasz = await response.json();
-
-                if (response.ok) {
-                    // const usersF = valasz.users;
-                    const reservationsF = valasz.reservations;
-                    // console.log(usersF);
-                    console.log(reservationsF);
-                    // console.log(user);
-
-                    const reser = reservationsF.filter((elem) => {
-                        return elem.user._id === userL._id;
-                    });
-                    console.log(reser);
-                    setReservations(reser);
-                    setLogo(userL.avatar);
-                    setInitialUserProfile(userL);
-                }
-            };
-
-            leker();
-        } catch (error) {
-            console.log(error.message);
+        
+        if (userL && userL._id) {
+            fetchReservations(userL);
+        } else {
+            // Ha nincs bejelentkezett felhasználó (userL), a statikus adatokat használjuk
+            setInitialUserProfile(initialUserProfileStatic);
         }
     }, []);
+
+    // ------------------------------------------------------------------
+    // ÚJ: Alert megjelenítése és elrejtése
+    // ------------------------------------------------------------------
+    const displayAlert = (msg, isSuccess = true) => {
+        setAlertMessage({ msg, isSuccess });
+        setShowAlert(true);
+        setTimeout(() => {
+            setShowAlert(false);
+        }, 4000); // 4 másodperc után eltűnik
+    };
+
 
     const handleProfilePicClick = () => {
         if (!isAvatarPanelOpen) {
@@ -224,6 +247,8 @@ function UserProfile() {
 
             reader.onloadend = () => {
                 setProfilePicture(reader.result);
+                const avatarUrl = reader.result
+                handleAvatarSelect(avatarUrl);
             };
             reader.readAsDataURL(file);
         }
@@ -234,7 +259,7 @@ function UserProfile() {
         setLogo(avatarUrl);
         setIsAvatarPanelOpen(false);
         console.log(user);
-
+        const kep = avatarUrl;
         try {
             const response = await fetch(
                 `http://localhost:3500/api/users-frontend/${user._id}`,
@@ -243,7 +268,7 @@ function UserProfile() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ avatarUrl }),
+                    body: JSON.stringify({ kep }),
                 }
             );
         } catch (error) {
@@ -279,9 +304,61 @@ function UserProfile() {
             setIsAvatarPanelOpen(false);
         }
     };
+
+    // ------------------------------------------------------------------
+    // ÚJ: Időpont Lemondása (MODOSÍTVA: alert helyett displayAlert)
+    // ------------------------------------------------------------------
+    const handleCancelReservation = async (reservationId, trainerName, idopont) => {
+        if (!window.confirm(`Biztosan lemondja a foglalást?\nEdző: ${trainerName}\nIdőpont: ${idopont}`)) {
+            return;
+        }
+
+        try {
+            const response = await fetch(
+                `http://localhost:3500/api/idopont-foglal/${reservationId}`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+
+            const result = await response.json();
+
+            if (response.ok) {
+                // EGYEDI ALERT HASZNÁLATA
+                displayAlert(result.msg, true); 
+                
+                // Frissítjük a reservations állapotot, hogy eltűnjön a lemondott időpont
+                setReservations(prevReservations => 
+                    prevReservations.filter(res => res._id !== reservationId)
+                );
+            } else {
+                // EGYEDI ALERT HASZNÁLATA
+                displayAlert(`Hiba a lemondáskor: ${result.msg}`, false);
+            }
+        } catch (error) {
+            console.error('Hiba a lemondási kérés küldésekor:', error);
+            // EGYEDI ALERT HASZNÁLATA
+            displayAlert('Hiba történt a szerverrel való kommunikáció során.', false);
+        }
+    };
+
     // ------------------------------------------------------------------
     return (
         <div className="profile-page-wrapper">
+            {/* --------------------------------------------------- */}
+            {/* ÚJ: EGYEDI ALERT KOMPONENS */}
+            {/* --------------------------------------------------- */}
+            {showAlert && (
+                <div className={`custom-alert ${alertMessage.isSuccess ? 'success' : 'error'}`}>
+                    {alertMessage.msg}
+                    <button onClick={() => setShowAlert(false)}>X</button>
+                </div>
+            )}
+            {/* --------------------------------------------------- */}
+
             <aside
                 className={`avatar-panel ${isAvatarPanelOpen ? 'open' : ''}`}
             >
@@ -383,7 +460,7 @@ function UserProfile() {
                             src={
                                 profilePicture
                                     ? profilePicture
-                                    : initialUserProfile.avatar
+                                    : initialUserProfile.avatar || initialUserProfileStatic.profilePictureUrl
                             }
                             alt={`Profilkép - ${initialUserProfile.name}`}
                             className="profile-pic"
@@ -399,6 +476,9 @@ function UserProfile() {
                         <em>{initialUserProfile.location}</em>
                     </p>
                 </header>
+                {/* --------------------------------------------------- */}
+                {/* FOGLALÁSOK LISTÁJA */}
+                {/* --------------------------------------------------- */}
                 {reservations.map((elem) => {
                     return (
                         <div
@@ -411,14 +491,20 @@ function UserProfile() {
                                 src={elem.trainer.kep}
                                 alt=""
                             />
-                            <button>Lemond</button>
+                            {/* Módosítottuk a Lemond gombot */}
+                            <button 
+                                onClick={() => handleCancelReservation(elem._id, elem.trainer.nev, elem.idopont)}
+                            >
+                                Lemond
+                            </button>
                         </div>
                     );
                 })}
+                {/* --------------------------------------------------- */}
                 <div className="profile-content">
                     <section className="profile-section">
-                        <h3 className="section-title">Rólam</h3>
-                        <p className="profile-bio">{initialUserProfile.bio}</p>
+                        <h3 className="section-title">Edző leírása</h3>
+                        <p className="profile-bio">{initialUserProfile.bio || initialUserProfileStatic.bio}</p>
                     </section>
 
                     <section className="profile-section">
@@ -426,13 +512,13 @@ function UserProfile() {
                         <ul className="contact-list">
                             <li>
                                 <strong>Email:</strong>{' '}
-                                <a href={`mailto:${initialUserProfile.email}`}>
-                                    {initialUserProfile.email}
+                                <a href={`mailto:${initialUserProfile.email || initialUserProfileStatic.email}`}>
+                                    {initialUserProfile.email || initialUserProfileStatic.email}
                                 </a>
                             </li>
                             <li>
                                 <strong>Telefon:</strong>{' '}
-                                {initialUserProfile.phone}
+                                {initialUserProfile.phone || initialUserProfileStatic.phone}
                             </li>
                         </ul>
                     </section>

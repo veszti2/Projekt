@@ -48,11 +48,11 @@ exports.getOneUserFrontend = async (req, res) => {
 exports.updateOneUserFrontend = async (req, res) => {
     try {
         const { id } = req.params;
-        const { avatarUrl } = req.body;
-        console.log(avatarUrl);
+        const { kep } = req.body;
+        console.log(kep);
         
         
-        const user = await User.findByIdAndUpdate({_id: id}, { $set: {avatar: avatarUrl}});
+        const user = await User.findByIdAndUpdate({_id: id}, { $set: {avatar: kep}});
         console.log(user);
         
         res.status(201).json({msg: 'Sikeres frissítés!'});
