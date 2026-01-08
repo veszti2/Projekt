@@ -59,13 +59,7 @@ const Trainers = () => {
                                     Kattints ide az edző részletes profiljának, tapasztalatainak és szabad időpontjainak megtekintéséhez.
                                 </p>
                                 
-                                <div className="trainer-footer">
-                                    <div className="trainer-info-row">
-                                        <span className="info-label">Elérhetőség:</span>
-                                        <span className="info-value">{t.elerhetoseg}</span>
-                                    </div>
-                                    <div className="price-tag">{t.ar}</div>
-                                </div>
+                              
                             </div>
                         </div>
                     ))}
