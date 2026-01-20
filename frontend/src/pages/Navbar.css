@@ -1,6 +1,4 @@
-/* Navbar.css */
-
-/* Alap navbar */
+/* --- ALAP NAVBAR STÍLUS --- */
 .navbar {
     width: 100%;
     height: 60px;
@@ -15,17 +13,17 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* Inner container - EZ A RÉSZ FONTOS! */
 .navbar-inner {
-    display: flex; /* Flexbox bekapcsolása */
+    display: flex;
     align-items: center;
-    width: 100%; /* TELJES SZÉLESSÉG kihasználása a jobb oldali igazításhoz */
-    padding: 0 20px; /* Egyenletes bal/jobb padding a navbar-ban */
-    max-width: 1400px; /* Megkötjük a maximális szélességet, ha van külső 'container' */
+    width: 100%;
+    padding: 0 20px;
+    max-width: 1400px;
     margin: 0 auto;
+    position: relative; /* Fontos a mobil hamburger pozicionálásához */
 }
 
-/* Logo fix balra */
+/* --- LOGO --- */
 .navbar-logo {
     font-size: 1.6rem;
     font-weight: bold;
@@ -34,6 +32,7 @@
     z-index: 10;
     transition: color 0.3s ease, transform 0.3s ease;
     margin-right: 20px;
+    white-space: nowrap;
 }
 
 .navbar-logo:hover {
@@ -41,15 +40,13 @@
     transform: scale(1.05);
 }
 
-/* Navbar linkek - Főmenü */
+/* --- NAVBAR LINKEK (ASZTALI) --- */
 .navbar-links {
     list-style: none;
-    display: flex; /* Flex-szé alakítás a linkek egymás melletti elrendezéséhez */
+    display: flex;
     padding: 0;
     margin: 0;
-
-    /* A kulcsfontosságú sor! Ez kitolja az összes utána következő elemet a jobb oldalra */
-    margin-right: auto;
+    margin-right: auto; /* Kitolja a jobb oldali elemeket */
 }
 
 .navbar-links li a {
@@ -61,7 +58,8 @@
     border-radius: 15px;
     transition: 0.2s ease, transform 0.2s ease;
     white-space: nowrap;
-    margin: 0 5px; /* Hely a linkek között */
+    margin: 0 5px;
+    font-weight: bold;
 }
 
 .navbar-links li a:hover {
@@ -71,11 +69,9 @@
     box-shadow: 0 0 25px rgb(168, 79, 16), 0 0 50px rgb(163, 7, 7);
 }
 
-/* === LOGIN / LOGOUT JOBBRA IGAZÍTÁS === */
-
-/* Ez a tároló tartalmazza a bejelentkezés/regisztráció linkeket VAGY a kilépés gombot */
+/* --- AUTH GOMBOK (ASZTALI) --- */
 .register-links,
-.navbar-inner > div:last-child {
+.desktop-only-auth .user-controls {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -84,106 +80,154 @@
     margin: 0;
 }
 
-/* Regisztrációs linkek stílusa */
-.register-links a {
+.register-links a,
+.logout-btn {
     display: block;
     padding: 8px 15px;
     background: #da9705;
     color: #0a0000;
     text-decoration: none;
-    border-radius: 15px;
-    transition: 0.2s ease, transform 0.2s ease;
-    white-space: nowrap;
-}
-
-.register-links li a:hover {
-    background: linear-gradient(135deg, rgb(247, 231, 5), rgb(187, 8, 8));
-    transform: translateY(-3px);
-    color: #000;
-    box-shadow: 0 0 25px rgb(168, 79, 16), 0 0 50px rgb(163, 7, 7);
-}
-
-
-/* Kilépés gomb stílusa (a JSX szerint div > button) */
-.navbar-inner > div > button {
-    padding: 8px 15px;
-    background: #da9705;
-    color: #0a0000;
     border: none;
     border-radius: 15px;
+    transition: 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+    font-weight: bold;
     cursor: pointer;
     font-size: 1rem;
-    font-weight: bold;
-    white-space: nowrap;
-    transition: 0.2s ease, transform 0.2s ease;
 }
 
-/* Kilépés gomb hover effekt */
-.navbar-inner > div > button:hover {
+.register-links a:hover,
+.logout-btn:hover {
     background: linear-gradient(135deg, rgb(247, 231, 5), rgb(187, 8, 8));
     transform: translateY(-3px);
     color: #000;
     box-shadow: 0 0 25px rgb(168, 79, 16), 0 0 50px rgb(163, 7, 7);
 }
 
-
-/* ======================================================= */
-/* 🚀 PROFIL GOMB ÉS AVATÁR KONTÉNER STÍLUSJAVÍTÁS 🚀 */
-/* ======================================================= */
-
+/* --- PROFIL ÉS AVATÁR --- */
 .logo-kontener {
-    /* Flexbox használata a Link és az Img elegáns elrendezéséhez */
     display: flex;
-    align-items: center; /* Függőlegesen középre igazítás */
-    gap: 8px; /* Kis tér a link és a kép között */
-    height: 38px; /* Magasabb, mint az alap link, hogy beférjen az avatár */
-    
-    /* A profil gomb kinézete */
+    align-items: center;
+    gap: 8px;
+    height: 38px;
     background: #da9705; 
     border-radius: 15px;
-    padding: 0 8px 0 15px; /* Padding beállítása: bal oldalon nagyobb, hogy a link szövege kényelmes legyen */
+    padding: 0 8px 0 15px;
     transition: 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Hover effekt a teljes konténerre, hogy egységes legyen */
 .logo-kontener:hover {
     background: linear-gradient(135deg, rgb(247, 231, 5), rgb(187, 8, 8));
     transform: translateY(-3px);
     box-shadow: 0 0 25px rgb(168, 79, 16), 0 0 50px rgb(163, 7, 7);
-    cursor: pointer;
 }
 
-/* A Link stílusa a konténeren belül */
 .logo-kontener a {
-    /* Minden korábbi pozicionálási stílus felülírása */
     all: unset; 
-    
-    /* A link szövegének stílusa */
     color: #0a0000;
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
-    white-space: nowrap;
 }
 
-/* A kép (Avatár/Logo) stílusa */
 .logo-kontener img {
-    /* Minden korábbi pozicionálási stílus felülírása */
-    position: static; 
-    
     width: 32px; 
     height: 32px;
     object-fit: cover;
-    border-radius: 50%; /* Kör alakú kép */
-    border: 2px solid #0a0000; /* Kis kontrasztos keret */
+    border-radius: 50%;
+    border: 2px solid #0a0000;
 }
 
-/* A bejelentkezett felhasználó konténerében lévő listaelem (a JSX miatt szükséges) */
-.navbar-inner > div:last-child li {
-    list-style: none;
-    display: flex; /* Hogy a li ne okozzon törést */
-    align-items: center;
-    padding: 0;
-    margin: 0;
+/* --- HAMBURGER MENÜ (ALAPBAN REJTVE) --- */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 2000;
+    margin-left: auto; /* Jobbra tolja a hamburgert mobilon */
 }
 
+.hamburger span {
+    width: 30px;
+    height: 3px;
+    background: #da9705;
+    transition: 0.3s;
+}
+
+.mobile-only-auth {
+    display: none; /* Csak mobilon jelenik meg a menüben */
+}
+
+/* --- 📱 RESZPONZÍV BEÁLLÍTÁSOK (992px alatt) --- */
+@media (max-width: 992px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .desktop-only-auth {
+        display: none; /* Eltűnik az asztali jobb oldali rész */
+    }
+
+    .navbar-links {
+        position: absolute;
+        top: 60px; /* Pontosan a navbar alatt kezdődik */
+        left: 0;
+        width: 100%;
+        background: #111;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        max-height: 0; /* Alapból zárva */
+        overflow: hidden;
+        transition: max-height 0.4s ease-in-out;
+        z-index: 1500;
+        margin-right: 0;
+    }
+
+    .navbar-links.active {
+        max-height: 600px; /* Kinyílik */
+        padding: 30px 0;
+        border-bottom: 2px solid #da9705;
+    }
+
+    .navbar-links li {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;
+    }
+
+    .navbar-links li a {
+        width: 80%; /* Szélesebb gombok mobilon */
+        text-align: center;
+    }
+
+    /* Mobilos Auth gombok stílusa a menün belül */
+    .mobile-only-auth {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .mobile-only-auth a, 
+    .mobile-only-auth button {
+        width: 80%;
+        padding: 12px;
+        background: #da9705;
+        border-radius: 15px;
+        color: #000;
+        font-weight: bold;
+        text-decoration: none;
+        border: none;
+        text-align: center;
+    }
+
+    /* Hamburger ikon animáció X-re */
+    .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+}
