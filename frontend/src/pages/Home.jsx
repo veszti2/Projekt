@@ -64,13 +64,7 @@ const Home = () => {
         </p>
       </section>
 
-      {/* Kapcsolat */}
-      <footer className="contact">
-        <h2>Lépj velünk kapcsolatba</h2>
-        <p>Email: <a href="mailto:info@quarterfitness.hu">info@quarterfitness.hu</a></p>
-        <p>Cím: 1134 Budapest, Sport utca 12.</p>
-        <p>Telefon: +36 30 123 4567</p>
-      </footer>
+      
     </div>
   )
 }

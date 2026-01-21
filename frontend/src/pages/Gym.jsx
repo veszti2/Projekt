@@ -108,9 +108,7 @@ const Gym = () => {
         </ul>
       </section>
 
-      <footer className="gym-footer">
-        <p>© 2025 Quarter Fitness | Prémium edzőterem Budapesten</p>
-      </footer>
+    
     </div>
   )
 }

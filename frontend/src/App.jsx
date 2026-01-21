@@ -12,6 +12,7 @@ import UserProfile from './pages/userProfile';
 import TrainerDetails from './pages/TrainerDetails';
 import { createContext } from 'react';
 import { useState } from 'react';
+import Footer from './components/Footer';
 
 export const logoContext = createContext();
 
@@ -71,6 +72,7 @@ function App() {
                     />
                          {' '}
                 </Routes>
+                <Footer />
                    {' '}
             </BrowserRouter>
                {' '}

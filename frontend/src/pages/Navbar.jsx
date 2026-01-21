@@ -6,6 +6,7 @@ import { logoContext } from '../App';
 function Navbar() {
     const { logo } = useContext(logoContext);
     const [isLoggedIn, setIsLoggedIn] = useState(0);
+    const [kep, setKep] = useState('');
     const [isAdmin, setIsAdmin] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false); // ÚJ: Menü állapota
 
@@ -14,6 +15,8 @@ function Navbar() {
         let user = JSON.parse(localStorage.getItem('user'));
         if (user && user.admin === true) setIsAdmin(true);
         else setIsAdmin(false);
+
+        if (user) setKep(user.avatar);
 
         if (1 === Number(logged)) setIsLoggedIn(1);
         else setIsLoggedIn(0);
@@ -86,7 +89,7 @@ function Navbar() {
                             <button onClick={kilep} className="logout-btn">Kilép</button>
                             <div className="logo-kontener">
                                 <Link to="/userProfile">Profil</Link>
-                                <img src={logo} alt="Avatar" />
+                                <img src={kep} alt="Avatar" />
                             </div>
                         </div>
                     )}

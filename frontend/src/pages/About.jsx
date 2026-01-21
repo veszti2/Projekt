@@ -115,10 +115,6 @@ const About = () => {
           Célunk, hogy minden vendégünk megtalálja a számára megfelelő utat az egészséges életmódhoz. 
         </p>
       </section>
-
-      <footer className="about-footer">
-        <p>© 2025 Quarter Fitness | Minden jog fenntartva</p>
-      </footer>
     </div>
   );
 };

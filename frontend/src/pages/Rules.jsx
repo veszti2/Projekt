@@ -106,9 +106,6 @@ const EdzoteremSzabalyzat = () => {
         </p>
       </section>
 
-      <footer className="gym-footer">
-        <p>© 2025 PowerFit Edzőterem | Minden jog fenntartva.</p>
-      </footer>
     </div>
     </>
   );
