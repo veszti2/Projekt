@@ -1,31 +1,58 @@
-import { DarkTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons'; // Expo ikonok
 
-export default function RootLayout() {
+export default function Layout() {
+  const router = useRouter();
+
   return (
-    <ThemeProvider value={DarkTheme}>
-      <Stack>
-        {/* A fő navigáció, ami a (tabs) mappát indítja el */}
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        
-        {/* A felugró ablak (Modal) globális beállítása */}
-        <Stack.Screen 
-          name="modal" 
-          options={{ 
-            presentation: 'modal', 
-            headerTitle: 'Információ',
-            headerStyle: { backgroundColor: '#1a1a1a' },
-            headerTintColor: '#f5c542',
-          }} 
-        />
-        
-        {/* Hibakezelő oldal (pl. ha elgépelsz egy útvonalat) */}
-        <Stack.Screen name="+not-found" options={{ title: 'Hiba!' }} />
-      </Stack>
-      
-      {/* Az állapotjelző sáv (óra, akksi) színe sötét módban fehér legyen */}
-      <StatusBar style="light" />
-    </ThemeProvider>
+    <Stack
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#111',
+        },
+        headerTintColor: '#da9705',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        // Itt definiáljuk a saját fejlécünket, ami hasonlít a webes Navbarra
+        headerTitle: () => (
+          <Text style={styles.logoText}>💪 GYMPOWER 💪</Text>
+        ),
+        headerRight: () => (
+          <View style={styles.headerIcons}>
+            <TouchableOpacity onPress={() => router.push('/userProfile')}>
+              <Ionicons name="person-circle-outline" size={30} color="#da9705" />
+            </TouchableOpacity>
+          </View>
+        ),
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => {/* Itt nyílhatna egy menü */}}>
+            <Ionicons name="menu" size={30} color="#da9705" />
+          </TouchableOpacity>
+        ),
+      }}
+    >
+      {/* Az útvonalak automatikusan jönnek a fájlrendszerből */}
+      <Stack.Screen name="index" options={{ title: 'Főoldal' }} />
+      <Stack.Screen name="about" options={{ title: 'Rólunk' }} />
+      <Stack.Screen name="gym" options={{ title: 'Terem' }} />
+      <Stack.Screen name="trainers" options={{ title: 'Edzők' }} />
+      <Stack.Screen name="rules" options={{ title: 'Szabályzat' }} />
+    </Stack>
   );
 }
+
+const styles = StyleSheet.create({
+  logoText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  headerIcons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingRight: 10,
+  }
+});
