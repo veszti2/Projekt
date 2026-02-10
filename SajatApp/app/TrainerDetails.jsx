@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import BookingModal from '../../components/BookingModal'; // Feltételezve, hogy a components-ben van
+import BookingModal from './Bookingmodal'; // Feltételezve, hogy a components-ben van
 
 // Időpont generáló logika (maradt az eredeti logika, RN-re igazítva)
 const generateAvailableTimes = (date, bookedTimes = []) => {

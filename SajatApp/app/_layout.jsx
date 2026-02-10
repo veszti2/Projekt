@@ -35,7 +35,7 @@ export default function Layout() {
       }}
     >
       {/* Az útvonalak automatikusan jönnek a fájlrendszerből */}
-      <Stack.Screen name="index" options={{ title: 'Főoldal' }} />
+      <Stack.Screen name="home" options={{ title: 'Főoldal' }} />
       <Stack.Screen name="about" options={{ title: 'Rólunk' }} />
       <Stack.Screen name="gym" options={{ title: 'Terem' }} />
       <Stack.Screen name="trainers" options={{ title: 'Edzők' }} />

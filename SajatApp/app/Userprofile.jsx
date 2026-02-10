@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { logoContext } from '../App'; // Feltételezve a környezetet
+// import { logoContext } from '../App'; // Feltételezve a környezetet
 
 // --- AVATÁR ADATOK (Ugyanazok az URL-ek, amiket megadtál) ---
 const FEMALE_AVATARS = [
