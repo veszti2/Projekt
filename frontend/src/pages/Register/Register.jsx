@@ -45,7 +45,7 @@ export default function Register() {
 
       {/* 🔵 onSubmit HOZZÁADVA */}
       <form className="register-form" onSubmit={regisztracio}>
-        <label htmlFor="username">Felhasználónév</label>
+        <label htmlFor="username" id="reg">Felhasználónév</label>
         <input
           type="text"
           id="username"
@@ -85,7 +85,7 @@ export default function Register() {
           onChange={(e) => setJelszoUjra(e.target.value)}
         />
 
-        <button className="auth-btn" type="submit">
+        <button className="auth-btn" type="submit" id="letrehoz">
           Fiók létrehozása
         </button>
       </form>

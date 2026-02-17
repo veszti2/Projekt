@@ -81,8 +81,8 @@ function Navbar() {
                 <div className="desktop-only-auth">
                     {isLoggedIn === 0 ? (
                         <ul className="register-links">
-                            <li><Link to="/login">Bejelentkezés</Link></li>
-                            <li><Link to="/register">Regisztráció</Link></li>
+                            <li><Link to="/login" id="bejel">Bejelentkezés</Link></li>
+                            <li><Link to="/register" id='reg'>Regisztráció</Link></li>
                         </ul>
                     ) : (
                         <div className="user-controls">

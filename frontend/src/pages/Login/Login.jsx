@@ -64,6 +64,7 @@ const Login = () => {
                 <input
                     type="email"
                     name="email"
+                    id="email"
                     placeholder="Add meg az email címed"
                     value={formData.email}
                     onChange={handleChange}
@@ -74,6 +75,7 @@ const Login = () => {
                 <input
                     type="password"
                     name="jelszo"
+                    id="jelszo"
                     placeholder="Add meg a jelszót"
                     value={formData.jelszo}
                     onChange={handleChange}
@@ -86,6 +88,7 @@ const Login = () => {
                 </div>
 
                 <button
+                    id='belepgomb'
                     type="submit"
                     className="btn-primary login-btn"
                 >
