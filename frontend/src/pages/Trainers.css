@@ -1,83 +1,106 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@104.2,300..700&display=swap');
 
-.gym-page {
+.trainers-page-container {
     background-color: #0c0c0c;
     color: #f4f4f4;
     font-family: 'Fredoka', sans-serif;
     padding-bottom: 50px;
+    min-height: 100vh;
 }
 
 /* === HERO === */
-.gym-hero {
-    height: 300px;
+.trainers-hero-banner {
+    height: 350px;
     background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
                 url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop') center/cover;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     border-bottom: 2px solid #a68a17;
 }
 
-.gym-hero h1 {
-    font-size: 3rem;
+.trainers-hero-title {
+    font-size: 3.5rem;
     color: #a68a17;
     letter-spacing: 2px;
     margin-bottom: 10px;
+    text-transform: uppercase;
 }
 
-.intro-text {
+.trainers-hero-subtitle {
+    font-size: 1.2rem;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+/* === SZÖVEG ÉS CÍMEK === */
+.trainers-intro-box {
     text-align: center;
-    margin: 40px 0;
+    margin: 60px 0 40px;
+}
+
+.trainers-section-title {
+    color: #a68a17;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.trainers-section-desc {
+    color: #999;
 }
 
 /* === GRID === */
-.trainer-grid {
+.trainers-card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    gap: 40px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
 /* === KÁRTYA === */
-.trainer-card {
+.trainers-profile-card {
     background: #161616;
-    border-radius: 15px;
+    border-radius: 20px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     border: 1px solid #282828;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
     height: 100%;
 }
 
-.trainer-card:hover {
-    transform: translateY(-8px);
+.trainers-profile-card:hover {
+    transform: translateY(-12px);
     border-color: #a68a17;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
 }
 
 /* === KÉP === */
-.trainer-img-wrap {
+.trainers-image-wrapper {
     position: relative;
-    height: 350px;
+    height: 400px;
     overflow: hidden;
 }
 
-.trainer-img-wrap img {
+.trainers-portrait {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
-.card-overlay {
+.trainers-profile-card:hover .trainers-portrait {
+    transform: scale(1.05);
+}
+
+.trainers-card-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(166, 138, 23, 0.4);
+    background: rgba(166, 138, 23, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -85,72 +108,65 @@
     transition: 0.3s ease;
 }
 
-.overlay-btn {
+.trainers-overlay-button {
     background: #a68a17;
     color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 24px;
+    border-radius: 30px;
     font-weight: bold;
     text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.trainer-card:hover .card-overlay { opacity: 1; }
+.trainers-profile-card:hover .trainers-card-overlay { 
+    opacity: 1; 
+}
 
-/* === SZÖVEG === */
-.trainer-content {
-    padding: 20px;
+/* === SZÖVEG TARTALOM === */
+.trainers-card-info {
+    padding: 25px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     text-align: center;
 }
 
-.trainer-name {
-    font-size: 1.5rem;
+.trainers-name-label {
+    font-size: 1.6rem;
     color: #fff;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
-.trainer-badge {
+.trainers-spec-badge {
     color: #a68a17;
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 15px;
-    display: block;
+    display: inline-block;
+    letter-spacing: 1px;
 }
 
-.trainer-cta-text {
-    font-size: 0.9rem;
-    color: #999;
-    line-height: 1.4;
-    margin-bottom: 20px;
+.trainers-description-text {
+    font-size: 0.95rem;
+    color: #888;
+    line-height: 1.5;
+    margin-top: auto;
     font-style: italic;
-    flex-grow: 1; /* Ez tolja le az alját */
-}
-
-/* === FOOTER === */
-.trainer-footer {
-    padding-top: 15px;
-    border-top: 1px solid #282828;
-}
-
-.trainer-info-row {
-    font-size: 0.8rem;
-    margin-bottom: 10px;
-}
-
-.info-label { color: #555; margin-right: 5px; }
-.info-value { color: #aaa; }
-
-.price-tag {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #4ade80;
-    margin-top: 5px;
 }
 
 /* RESPONSIVE */
+@media (max-width: 768px) {
+    .trainers-hero-title {
+        font-size: 2.5rem;
+    }
+}
+
 @media (max-width: 480px) {
-    .trainer-grid { grid-template-columns: 1fr; }
+    .trainers-card-grid { 
+        grid-template-columns: 1fr; 
+    }
+    .trainers-image-wrapper {
+        height: 350px;
+    }
 }

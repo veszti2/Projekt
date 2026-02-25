@@ -1,18 +1,18 @@
 /* Gym.css - Teljes reszponzív stíluslap */
 
 /* Alapbeállítások */
-.gym-page {
+.gym-page-wrapper {
     background-color: #111111;
     color: #f5f5f5;
     font-family: 'Poppins', sans-serif;
     text-align: center;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Megakadályozza az oldalsó kilógást */
+    overflow-x: hidden;
 }
 
 /* HERO SZEKCIÓ */
-.gym-hero {
+.gym-hero-header {
     background: url('https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=1600&q=80')
         no-repeat center center/cover;
     height: 75vh;
@@ -22,8 +22,8 @@
     justify-content: center;
 }
 
-/* Sötétítő réteg a háttérképen a jobb olvashatóságért */
-.gym-hero::after {
+/* Sötétítő réteg */
+.gym-hero-header::after {
     content: '';
     position: absolute;
     top: 0;
@@ -42,16 +42,16 @@
     width: 100%;
 }
 
-.gym-hero h1 {
-    font-size: clamp(2.2rem, 8vw, 3.8rem); /* Automatikusan méreteződik */
-    color: #f5c542; /* A modal sárga színe */
+.gym-hero-content h1 {
+    font-size: clamp(2.2rem, 8vw, 3.8rem);
+    color: #f5c542;
     margin-bottom: 1.5rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: -1px;
 }
 
-.gym-hero p {
+.gym-hero-content p {
     font-size: clamp(1rem, 4vw, 1.3rem);
     line-height: 1.6;
     color: #ffffff;
@@ -62,13 +62,13 @@
 }
 
 /* ÁLTALÁNOS SZEKCIÓ STÍLUSOK */
-.gym-section {
+.gym-main-section {
     padding: 80px 20px;
     max-width: 1100px;
     margin: 0 auto;
 }
 
-.gym-section h2 {
+.gym-main-section h2 {
     color: #f5c542;
     font-size: clamp(1.6rem, 5vw, 2.5rem);
     margin-bottom: 1.5rem;
@@ -76,7 +76,7 @@
     font-weight: 700;
 }
 
-.gym-section p {
+.gym-main-section p {
     line-height: 1.8;
     color: #cccccc;
     font-size: 1.1rem;
@@ -85,28 +85,30 @@
 }
 
 /* ZÓNÁK - GRID ELRENDEZÉS */
-.zone-cards {
+.gym-zone-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
     margin-top: 50px;
 }
 
-.zone-card {
+.gym-zone-card {
     background-color: #1a1a1a;
     border-radius: 16px;
     overflow: hidden;
     transition: transform 0.3s ease, border-color 0.3s ease;
     text-align: left;
     border: 1px solid #2a2a2a;
+    display: flex;
+    flex-direction: column;
 }
 
-.zone-card:hover {
+.gym-zone-card:hover {
     transform: translateY(-10px);
     border-color: #f5c542;
 }
 
-.zone-card img {
+.gym-zone-card img {
     width: 100%;
     height: 230px;
     object-fit: cover;
@@ -114,33 +116,41 @@
     transition: filter 0.3s ease;
 }
 
-.zone-card:hover img {
+.gym-zone-card:hover img {
     filter: grayscale(0%);
 }
 
-.zone-card h3 {
+.gym-card-body {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.gym-card-body h3 {
     color: #f5c542;
-    padding: 20px 20px 10px;
-    margin: 0;
+    margin: 0 0 10px 0;
     font-size: 1.4rem;
 }
 
-.zone-card p {
+.gym-card-body p {
     font-size: 0.95rem;
-    padding: 0 20px 25px;
     color: #bbbbbb;
     line-height: 1.5;
     margin: 0;
 }
 
 /* ÖSSZEGZÉS LISTA */
-.gym-section.summary {
+.gym-summary {
     background-color: #0c0c0c;
-    max-width: 100%; /* A háttér fusson ki a széléig */
+    max-width: 100% !important;
     padding: 100px 20px;
 }
 
-.gym-section.summary ul {
+.gym-summary-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.gym-feature-list {
     list-style: none;
     padding: 30px;
     background: #1a1a1a;
@@ -151,48 +161,46 @@
     border: 1px solid #333333;
 }
 
-.gym-section.summary li {
+.gym-feature-list li {
     padding: 15px 0;
     border-bottom: 1px solid #2a2a2a;
     color: #f5f5f5;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.gym-section.summary li:last-child {
+.gym-feature-list li:last-child {
     border-bottom: none;
 }
 
 /* RESZPONZÍV JAVÍTÁSOK */
 @media (max-width: 768px) {
-    .gym-hero {
+    .gym-hero-header {
         height: 60vh;
     }
 
-    .gym-section {
+    .gym-main-section {
         padding: 60px 15px;
     }
 
-    .zone-cards {
-        grid-template-columns: 1fr; /* Mobilnézetben egy oszlop */
+    .gym-zone-grid {
+        grid-template-columns: 1fr;
     }
 
-    .zone-card {
+    .gym-zone-card {
         max-width: 450px;
         margin: 0 auto;
     }
-
-    .gym-hero-content {
-        padding: 10px;
-    }
 }
 
-/* Kifejezetten kis kijelzőkre (pl. iPhone SE) */
 @media (max-width: 400px) {
-    .gym-hero h1 {
+    .gym-hero-content h1 {
         font-size: 1.8rem;
     }
     
-    .gym-section.summary ul {
+    .gym-feature-list {
         padding: 15px;
     }
 }

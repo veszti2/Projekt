@@ -1,7 +1,7 @@
-async function torolUser(id) {
+async function torol(id) {
     try {
         const response = await fetch(
-            `http://localhost:3500/api/users-backend/${id}`,
+            `http://localhost:3500/api/users-backend/torol/${id}`,
             {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
@@ -15,10 +15,10 @@ async function torolUser(id) {
     }
 }
 
-async function modositUser(id, nev, email, admin) {
+async function modosit(id, nev, email, admin) {
     try {
         const response = await fetch(
-            'http://localhost:3500/api/users-backend',
+            `http://localhost:3500/api/users-backend/modosit/${id}`,
             {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },

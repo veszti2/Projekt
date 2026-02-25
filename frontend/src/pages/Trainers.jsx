@@ -27,39 +27,49 @@ const Trainers = () => {
     }
 
     return (
-        <div className="gym-page">
+        <div className="trainers-page-container">
             <Navbar />
 
-            <section className="gym-hero">
-                <h1>Szakértő Edzőink</h1>
-                <p>Profi csapat a Te sikeredért</p>
+            {/* HERO SZEKCIÓ */}
+            <section className="trainers-hero-banner">
+                <div className="trainers-hero-inner">
+                    <h1 className="trainers-hero-title">Szakértő Edzőink</h1>
+                    <p className="trainers-hero-subtitle">Profi csapat a Te sikeredért</p>
+                </div>
             </section>
 
-            <section className="gym-section">
-                <div className="intro-text">
-                    <h2>Válaszd ki a mentorodat</h2>
-                    <p>Kattints a kártyákra a részletes bemutatkozásért és az órarendért.</p>
+            {/* TARTALOM */}
+            <section className="trainers-main-content">
+                <div className="trainers-intro-box">
+                    <h2 className="trainers-section-title">Válaszd ki a mentorodat</h2>
+                    <p className="trainers-section-desc">Kattints a kártyákra a részletes bemutatkozásért és az órarendért.</p>
                 </div>
 
-                <div className="trainer-grid">
+                <div className="trainers-card-grid">
                     {trainers.map((t) => (
-                        <div className="trainer-card" key={t._id} onClick={() => goToTrainerPage(t._id)}>
-                            <div className="trainer-img-wrap">
-                                <img src={t.kep || "https://placehold.co/400x500?text=Trainer"} alt={t.nev} />
-                                <div className="card-overlay">
-                                    <span className="overlay-btn">Profil megtekintése</span>
+                        <div 
+                            className="trainers-profile-card" 
+                            key={t._id} 
+                            onClick={() => goToTrainerPage(t._id)}
+                        >
+                            <div className="trainers-image-wrapper">
+                                <img 
+                                    className="trainers-portrait"
+                                    src={t.kep || "https://placehold.co/400x500?text=Trainer"} 
+                                    alt={t.nev} 
+                                />
+                                <div className="trainers-card-overlay">
+                                    <span className="trainers-overlay-button">Profil megtekintése</span>
                                 </div>
                             </div>
 
-                            <div className="trainer-content">
-                                <h3 className="trainer-name">{t.nev}</h3>
-                                <span className="trainer-badge">{t.specialization || "Személyi Edző"}</span>
+                            <div className="trainers-card-info">
+                                <h3 className="trainers-name-label">{t.nev}</h3>
+                                <span className="trainers-spec-badge">{t.specialization || "Személyi Edző"}</span>
                                 
-                                <p className="trainer-cta-text">
+                                <p className="trainers-description-text">
                                     Kattints ide az edző részletes profiljának, tapasztalatainak és szabad időpontjainak megtekintéséhez.
                                 </p>
-                                
-                              
                             </div>
                         </div>
                     ))}

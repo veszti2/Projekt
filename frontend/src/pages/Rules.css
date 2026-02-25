@@ -1,147 +1,144 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@104.2,500&display=swap');
 
 /* === ALAP BEÁLLÍTÁSOK === */
-.gym-page {
-  font-family: url('https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@104.2,500&display=swap');
+.rules-page-wrapper {
+  font-family: 'Fredoka', sans-serif;
   color: #f4f4f4;
   background-color: #1b1b1b;
-  /* line-height: 1.7; */
   padding-bottom: 3rem;
-  
+  min-height: 100vh;
 }
 
 /* HERO SZEKCIÓ */
-.gym-hero {
+.rules-hero-banner {
   background: linear-gradient(135deg, #111 0%, #1f1f1f 100%);
   color: #fff;
   text-align: center;
-  padding: 6rem 1rem 5rem;
-  border-bottom: 2px solid #a68a17;
-  
+  padding: 8rem 1rem 6rem;
+  border-bottom: 3px solid #a68a17;
 }
 
-.gym-hero h1 {
-   background: linear-gradient(135deg, #1b1b1b, #222);
+.rules-hero-content h1 {
+  background: linear-gradient(135deg, #1b1b1b, #222);
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
-  transition: all 0.5s ease;
-  box-shadow: 0 0 40px rgba(186, 158, 46, 0.2);
-  transform: translateY(-10px);
-}
-
-.gym-hero p {
-  color: whitesmoke;
-  text-shadow: 0 0 10px rgba(196, 159, 38, 0.8), 0 0 25px rgba(229, 201, 17, 0.4);
-  font-size: 1.8rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 1rem;
-  border-left: 4px solid #a68a17;
-  padding-left: 0.8rem;
-  max-width: 900px;
-  
-}
-
-/* SZEKCIÓK */
-.gym-section {
-  max-width: 900px;
-  margin: 3rem auto;
-  background-color: #222;
-  padding: 2.5rem 3rem;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.25);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  display: inline-block;
+  box-shadow: 0 0 40px rgba(166, 138, 23, 0.2);
+  margin-bottom: 2rem;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  text-transform: uppercase;
+  border: 1px solid #333;
 }
 
-.gym-section:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 15px #a68a17;
+.rules-hero-content p {
+  color: #f5f5f5;
+  text-shadow: 0 0 10px rgba(166, 138, 23, 0.5);
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* TARTALOM ELRENDEZÉS */
+.rules-content-container {
+  max-width: 900px;
+  margin: -3rem auto 0; /* Belecsúszik kicsit a heroba */
+  padding: 0 20px;
+  position: relative;
+  z-index: 10;
+}
+
+/* SZEKCIÓ KÁRTYÁK */
+.rules-card-section {
+  background-color: #222;
+  padding: 2.5rem;
+  border-radius: 16px;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 5px solid #a68a17;
+}
+
+.rules-card-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(166, 138, 23, 0.15);
 }
 
 /* CÍMEK */
-.gym-section h2 {
+.rules-card-section h2 {
   color: #a68a17;
   font-size: 1.6rem;
-  margin-bottom: 1rem;
-  border-left: 4px solid #a68a17;
-  padding-left: 0.8rem;
+  margin-bottom: 1.2rem;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-/* BEKEZDÉSEK */
-.gym-section p {
-  color: #ddd;
+/* SZÖVEGEK */
+.rules-card-section p {
+  color: #ccc;
   font-size: 1.05rem;
-  margin-top: 0.5rem;
+  line-height: 1.7;
 }
 
 /* LISTÁK */
-.gym-section ul {
-  margin: 1rem 0;
-  padding-left: 1.5rem;
+.rules-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
 }
 
-.gym-section li {
-  margin-bottom: 0.6rem;
+.rules-list li {
+  margin-bottom: 1rem;
+  padding-left: 2rem;
   position: relative;
-  color: #ccc;
-  font-size: 1rem;
+  color: #ddd;
 }
 
-.gym-section li::before {
-  content: '•';
+.rules-list li::before {
+  content: '✔';
   color: #a68a17;
-  font-weight: bold;
   position: absolute;
-  left: -1rem;
+  left: 0;
+  font-weight: bold;
 }
 
 /* LINKEK */
-.gym-section a {
+.rules-card-section a {
   color: #a68a17;
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
 }
 
-.gym-section a:hover {
-  color: #a68a17;
+.rules-card-section a:hover {
+  border-bottom: 1px solid #a68a17;
 }
 
 /* LÁBLÉC */
-.gym-footer {
+.rules-page-footer {
   text-align: center;
-  margin-top: 3rem;
-  padding: 2rem 1rem;
-  background-color: #111;
-  border-top: 2px solid #a68a17;
+  margin-top: 4rem;
+  padding: 2rem;
+  border-top: 1px solid #333;
 }
 
-.gym-footer p {
-  color: #999;
-  font-size: 0.95rem;
+.rules-page-footer p {
+  color: #666;
+  font-size: 0.9rem;
 }
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-  .gym-hero h1 {
-    margin-top: 8em;
-    font-size: 2.2rem;
+  .rules-hero-banner {
+    padding: 6rem 1rem 4rem;
   }
 
-  .gym-hero-content {
-    /* height: 8em; */
-    font-size: 2.2rem;
-  }
-  
-  .gym-section {
-    margin: 2rem 1rem;
-    padding: 4rem 1.5rem;
+  .rules-card-section {
+    padding: 1.5rem;
   }
 
-  .gym-section h2 {
-    font-size: 1.4rem;
+  .rules-hero-content h1 {
+    font-size: 1.6rem;
+    padding: 1.5rem;
   }
 }
