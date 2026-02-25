@@ -15,14 +15,16 @@ async function torol(id) {
     }
 }
 
-async function modosit(id, nev, email, admin) {
+async function modosit(id, admin) {
+    console.log(admin);
+    
     try {
         const response = await fetch(
             `http://localhost:3500/api/users-backend/modosit/${id}`,
             {
-                method: 'PUT',
+                method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id, nev, email, admin }),
+                body: JSON.stringify({ admin }),
             }
         );
 

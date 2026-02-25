@@ -16,7 +16,7 @@
         <%- include('../nav.ejs') %>
         <div id="felhasznalo-kontener">
             <h1>Felhasználók</h1>
-            <button onclick="idopont_torles()">Régi időpontok törlése</button>
+            <!-- <button onclick="idopont_torles()">Régi időpontok törlése</button> -->
             <div id="felhasznalok-kontener">
                 <% users.forEach(elem => { %>
                 <div class="felhasznalo-egy-kontener">
@@ -45,12 +45,12 @@
                             <td>Admin:</td>
                             <td>
                                 <label for="admin_igen">Igen</label>
-                                <input type="radio" id="admin_igen"
+                                <input type="radio" id="admin_igen" onchange="kiir('<%= elem._id %>', 'true')"
                                 name="admin_<%= elem.email%>" value="true" <% if
                                 (elem.admin === true) { %> checked <% } %> />
 
                                 <label for="admin_nem">Nem</label>
-                                <input type="radio" id="admin_nem"
+                                <input type="radio" id="admin_nem" onchange="kiir('<%= elem._id %>', 'false')"
                                 name="admin_<%= elem.email%>" value="false" <%
                                 if (elem.admin === false) { %> checked <%} %> />
                             </td>
@@ -65,11 +65,6 @@
                     <% } %> <% } %>
 
                     <div id="felhasznalo-gombok">
-                        <button
-                            onclick="modosit('<%= elem._id %>', '<%= elem.nev %>', '<%= elem.email %>', 'admin_<%= elem.email%>')"
-                        >
-                            Módosítás
-                        </button>
                         <button onclick="torol('<%= elem._id %>')">
                             Törlés
                         </button>
@@ -79,5 +74,23 @@
             </div>
         </div>
         <script src="/js/felhasznalok.js"></script>
+        <script>
+            async function kiir(id, admin) {
+                try {
+                    const response = await fetch(`http://localhost:3500/api/users-backend/modosit/${id}`,
+                    {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ admin:  admin }),
+                    }
+                );
+
+                return await response.json();
+                } catch (error) {
+                    console.log('Backend hiba:', error.message);
+                    throw error;
+                }
+            }
+        </script>
     </body>
 </html>

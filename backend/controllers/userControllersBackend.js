@@ -52,14 +52,15 @@ exports.createUser = async (req, res) => {
 };
 
 exports.updateUser = async (req, res) => {
+    const { id } = req.params;
+    const { admin } = req.body;
+
+    console.log({ admin });
+    
     try {
-        const updated = await User.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-        }).lean();
-        if (!updated)
-            return res
-                .status(404)
-                .json({ message: 'Felhasználó nem található' });
+        const updated = await User.findByIdAndUpdate({ _id: id }, { $set: { admin: admin } });
+        console.log(updated);
+        
         res.json(updated);
     } catch (err) {
         res.status(400).json({
