@@ -10,7 +10,7 @@ import Register from './pages/Register/Register';
 import UserProfile from './pages/userProfile';
 // ÚJ IMPORT: Az egyedi edző oldal komponense
 import TrainerDetails from './pages/TrainerDetails';
-import { createContext } from 'react';
+import { createContext, useEffect } from 'react';
 import { useState } from 'react';
 import Footer from './components/Footer';
 
@@ -18,6 +18,12 @@ export const logoContext = createContext();
 
 function App() {
     const [logo, setLogo] = useState('');
+
+    useEffect(() => { 
+        let user = JSON.parse(localStorage.getItem('user'));
+        if (user) setLogo(user.avatar);
+    }, []);
+
     return (
         <logoContext.Provider value={{ logo, setLogo }}>
                {' '}

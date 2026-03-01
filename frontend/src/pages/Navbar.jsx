@@ -11,16 +11,18 @@ function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false); // ÚJ: Menü állapota
 
     useEffect(() => {
+        console.log(logo);
+        
         let logged = JSON.parse(localStorage.getItem('isLoggedIn'));
         let user = JSON.parse(localStorage.getItem('user'));
         if (user && user.admin === true) setIsAdmin(true);
         else setIsAdmin(false);
-
-        if (user) setKep(user.avatar);
+        if (logo) setKep(logo);
+        else if (user) setKep(user.avatar);
 
         if (1 === Number(logged)) setIsLoggedIn(1);
         else setIsLoggedIn(0);
-    }, []);
+    }, [logo]);
 
     const kilep = () => {
         setIsAdmin(false);

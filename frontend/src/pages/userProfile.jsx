@@ -247,6 +247,7 @@ function UserProfile() {
 
             reader.onloadend = () => {
                 setProfilePicture(reader.result);
+                setLogo(reader.result);
                 const avatarUrl = reader.result
                 handleAvatarSelect(avatarUrl);
             };
@@ -255,6 +256,7 @@ function UserProfile() {
     };
 
     const handleAvatarSelect = async (avatarUrl) => {
+        console.log(avatarUrl);
         setProfilePicture(avatarUrl);
         setLogo(avatarUrl);
         setIsAvatarPanelOpen(false);
